@@ -1,0 +1,97 @@
+//out:null
+
+
+html,
+body,
+div,
+ul,
+li,
+p,
+footer,
+header,
+article,
+a,
+b,
+em,
+nav,
+form,
+input,
+textarea,
+select,
+button,
+i,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    padding: 0;
+    margin: 0;
+    border: none;
+    list-style: none;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+input,
+textarea,
+button {
+    &:focus {
+        outline: none;
+    }
+}
+
+body {
+    font: 14px/1.5 "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", "Hiragino Sans GB", "Heiti SC", "WenQuanYi Micro Hei", sans-serif;
+    color: #040404;
+    background: #eee;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    -webkit-text-size-adjust: 100%;
+}
+
+header,
+nav,
+footer,
+article {
+    display: block;
+}
+
+a {
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects;
+}
+
+a:active,
+a:hover {
+    outline-width: 0;
+}
+
+::-webkit-input-placeholder {
+    color: inherit;
+    opacity: 0.54;
+}
+
+::-webkit-file-upload-button {
+    -webkit-appearance: button;
+    font: inherit;
+}
+
+.scrolling {
+    overflow-y: scroll!important;
+    -webkit-overflow-scrolling: touch!important;
+}
+
+.red {
+    color: red;
+}
+
+img {
+    border: none;
+    max-width: 100%;
+}
