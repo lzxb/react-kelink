@@ -71,7 +71,7 @@ class Index extends Component {
                         
                         if (!data){
                             classid.title = '';
-                            classid.loadMsg = '加载错误，请确保此栏目是文章栏目！';
+                            classid.loadMsg = '暂无记录';
                         }
                         
                         return GET_DATA_SUCCESS(DB);

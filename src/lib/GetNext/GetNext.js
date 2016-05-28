@@ -17,6 +17,7 @@
         this.right = set.right || 0; //元素在右边伸出的距离才加载
         this.bottom = set.bottom || 0; //元素在底部伸出的距离才加载
         this.left = set.left || 0; //元素在左边伸出的距离才加载
+        this.dataType = 'json';
         /*
             发送到服务器的相关数据
         */
@@ -113,7 +114,7 @@
             var head = xhr.getAllResponseHeaders();
             var response = xhr.responseText;
             //将服务器返回的数据，转换成json
-            if (/application\/json/.test(head)) {
+            if (/application\/json/.test(head) || this.dataType === 'json') {
                 response = JSON.parse(response);
             }
 

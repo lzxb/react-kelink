@@ -1,10 +1,10 @@
 CACHE MANIFEST
-# efbdef3af12d344afdfe
+# 4a447eba72f32ff42abc
 
 /build/iconfont.eot
-/build/iconfont.svg
-/build/iconfont.ttf
 /build/iconfont.woff
+/build/iconfont.ttf
+/build/iconfont.svg
 /build/app.js
 
 NETWORK:

@@ -10,6 +10,7 @@ Tool.ajax = function (mySetting) {
         async: true, //true。默认设置下，所有请求均为异步请求。如果需要发送同步请求，请将此选项设置为 false
         type: 'GET', //请求的方式
         data: {}, //发给服务器的数据
+        dataType: 'json',
         success: function (text) {}, //请求成功执行方法
         error: function () {} //请求失败执行方法
     };
@@ -55,7 +56,7 @@ Tool.ajax = function (mySetting) {
             var response = xhr.responseText;
             //将服务器返回的数据，转换成json
 
-            if (/application\/json/.test(head)) {
+            if (/application\/json/.test(head) || setting.dataType === 'json') {
                 response = JSON.parse(response);
             }
 
