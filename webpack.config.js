@@ -1,5 +1,4 @@
 var webpack = require('webpack');
-var AppCachePlugin = require('appcache-webpack-plugin');
 
 module.exports = {
     entry: {
@@ -43,9 +42,6 @@ module.exports = {
             'process.env': {
                 NODE_ENV: JSON.stringify('production')
             }
-        }),
-        new AppCachePlugin({ //自动生成app.appcache 离线缓存清单
-            output: 'app.appcache'
         })
     ],
     resolve: {
