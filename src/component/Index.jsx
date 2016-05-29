@@ -13,7 +13,7 @@ import action from '../action/index';
 /*
     公共react组件
 */
-import {Header, Loading} from './common/index';
+import {Header, Footer, Loading} from './common/index';
 
 /*
     相关的模块调用
@@ -120,12 +120,14 @@ class Index extends Component {
         if (Tool.isArray(data)) {
             main = (<ArticleList list={data} />);
         }
+        let index = this.classid === config.indexClassId ? 0 : 1;
         
         return (
             <div>
-                <Header leftTo="/about" leftIcon="guanyu" title={title} rightTo="/menu" rightIcon="caidan"/>
+                <Header title={title} />
                 {main}
                 <div ref="dataload"><Loading loadState={loadState} loadMsg={loadMsg} /></div>
+                <Footer index={index}/>
             </div>
         );
     }
@@ -163,11 +165,19 @@ export class ArticleList extends Component {
             <ul className="article-list">
                 {
                     this.props.list.map((item, index) => {
-                        let {id, book_title, book_content, book_click, classname, book_classid} = item;
+                        let {id, book_title, book_content, book_click, classname, book_classid, book_img} = item;
                         book_content = book_content.substring(0, 50) + '...';
+                        let images = null;
+                        if(/^http/.test(book_img)) {
+                            images = (
+                                <div className="pictrue" style={{backgroundImage: 'url(' + book_img + ')'}}></div>
+                            );
+                        }
+                        
                         return (
                             <li key={index}>
                                 <Link to={'/article/' + id}>
+                                    {images}
                                     <h3>{book_title}</h3>
                                     <div className="content">{book_content}</div>
                                 </Link>

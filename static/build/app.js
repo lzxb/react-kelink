@@ -27503,17 +27503,19 @@
 	            if (_Tool2.default.isArray(data)) {
 	                main = _react2.default.createElement(ArticleList, { list: data });
 	            }
+	            var index = this.classid === _config2.default.indexClassId ? 0 : 1;
 
 	            return _react2.default.createElement(
 	                'div',
 	                null,
-	                _react2.default.createElement(_index3.Header, { leftTo: '/about', leftIcon: 'guanyu', title: title, rightTo: '/menu', rightIcon: 'caidan' }),
+	                _react2.default.createElement(_index3.Header, { title: title }),
 	                main,
 	                _react2.default.createElement(
 	                    'div',
 	                    { ref: 'dataload' },
 	                    _react2.default.createElement(_index3.Loading, { loadState: loadState, loadMsg: loadMsg })
-	                )
+	                ),
+	                _react2.default.createElement(_index3.Footer, { index: index })
 	            );
 	        }
 	    }, {
@@ -27580,14 +27582,21 @@
 	                    var book_click = item.book_click;
 	                    var classname = item.classname;
 	                    var book_classid = item.book_classid;
+	                    var book_img = item.book_img;
 
 	                    book_content = book_content.substring(0, 50) + '...';
+	                    var images = null;
+	                    if (/^http/.test(book_img)) {
+	                        images = _react2.default.createElement('div', { className: 'pictrue', style: { backgroundImage: 'url(' + book_img + ')' } });
+	                    }
+
 	                    return _react2.default.createElement(
 	                        'li',
 	                        { key: index },
 	                        _react2.default.createElement(
 	                            _reactRouter.Link,
 	                            { to: '/article/' + id },
+	                            images,
 	                            _react2.default.createElement(
 	                                'h3',
 	                                null,
@@ -27690,7 +27699,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	exports.Loading = exports.Header = undefined;
+	exports.Footer = exports.Loading = exports.Header = undefined;
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -27808,6 +27817,65 @@
 	    return Loading;
 	}(_react.Component);
 
+	var Footer = exports.Footer = function (_Component3) {
+	    _inherits(Footer, _Component3);
+
+	    function Footer() {
+	        _classCallCheck(this, Footer);
+
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(Footer).apply(this, arguments));
+	    }
+
+	    _createClass(Footer, [{
+	        key: 'render',
+	        value: function render() {
+	            var arr = [];
+	            arr[this.props.index] = 'on';
+	            return _react2.default.createElement(
+	                'footer',
+	                { className: 'common-footer' },
+	                _react2.default.createElement('div', { className: 'zhanwei' }),
+	                _react2.default.createElement(
+	                    'ul',
+	                    { className: 'menu', 'data-flex': 'box:mean' },
+	                    _react2.default.createElement(
+	                        'li',
+	                        { className: arr[0] },
+	                        _react2.default.createElement(
+	                            _reactRouter.Link,
+	                            { to: '/' },
+	                            _react2.default.createElement('i', { className: 'iconfont icon-zhuye' }),
+	                            '首页'
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'li',
+	                        { className: arr[1] },
+	                        _react2.default.createElement(
+	                            _reactRouter.Link,
+	                            { to: '/menu' },
+	                            _react2.default.createElement('i', { className: 'iconfont icon-caidan' }),
+	                            '分类'
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'li',
+	                        { className: arr[2] },
+	                        _react2.default.createElement(
+	                            _reactRouter.Link,
+	                            { to: '/about' },
+	                            _react2.default.createElement('i', { className: 'iconfont icon-guanyu' }),
+	                            '关于'
+	                        )
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+
+	    return Footer;
+	}(_react.Component);
+
 /***/ },
 /* 252 */
 /***/ function(module, exports) {
@@ -27878,7 +27946,7 @@
 	            var response = xhr.responseText;
 	            //将服务器返回的数据，转换成json
 
-	            if (/application\/json/.test(head) || setting.dataType === 'json') {
+	            if (/application\/json/.test(head) || setting.dataType === 'json' && /^\[([\s\S])*?\]$/.test(response)) {
 	                response = JSON.parse(response);
 	            }
 
@@ -28109,7 +28177,7 @@
 	            var head = xhr.getAllResponseHeaders();
 	            var response = xhr.responseText;
 	            //将服务器返回的数据，转换成json
-	            if (/application\/json/.test(head) || this.dataType === 'json') {
+	            if (/application\/json/.test(head) || this.dataType === 'json' && /^\[([\s\S])*?\]$/.test(response)) {
 	                response = JSON.parse(response);
 	            }
 
@@ -28200,9 +28268,14 @@
 	  value: true
 	});
 	var config = {};
+
+	config.version = '1.0.1';
+
 	config.indexTitle = '柯林文章客户端'; //首页标题
 
-	config.indexClassId = '400'; //程序默认的栏目id
+	config.siteid = '1000'; //默认网站id
+
+	config.indexClassId = '0'; //程序默认的栏目id
 
 	exports.default = config;
 
@@ -28488,8 +28561,9 @@
 	            return _react2.default.createElement(
 	                'div',
 	                null,
-	                _react2.default.createElement(_index3.Header, { leftTo: '/', leftIcon: 'fanhui', title: '分类' }),
-	                main
+	                _react2.default.createElement(_index3.Header, { title: '分类' }),
+	                main,
+	                _react2.default.createElement(_index3.Footer, { index: '1' })
 	            );
 	        }
 	    }, {
@@ -28530,7 +28604,9 @@
 	                    this.props.list.map(function (item, index) {
 	                        var classname = item.classname;
 	                        var classid = item.classid;
+	                        var typePath = item.typePath;
 
+	                        if (typePath !== 'article/index.aspx') return false;
 	                        return _react2.default.createElement(
 	                            'li',
 	                            { key: index },
@@ -28619,7 +28695,7 @@
 	            return _react2.default.createElement(
 	                'div',
 	                null,
-	                _react2.default.createElement(_index3.Header, { leftTo: '/', leftIcon: 'fanhui', title: '详情' }),
+	                _react2.default.createElement(_index3.Header, { title: '关于' }),
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'about' },
@@ -28636,7 +28712,8 @@
 	                        'div',
 	                        { className: 'info' },
 	                        _config2.default.indexTitle,
-	                        ' 1.0'
+	                        ' ',
+	                        _config2.default.version
 	                    ),
 	                    _react2.default.createElement(
 	                        'div',
@@ -28648,7 +28725,8 @@
 	                            '134064134'
 	                        )
 	                    )
-	                )
+	                ),
+	                _react2.default.createElement(_index3.Footer, { index: '2' })
 	            );
 	        }
 	    }]);
@@ -28884,7 +28962,7 @@
 
 
 	// module
-	exports.push([module.id, "html,\nbody,\ndiv,\nul,\nli,\np,\nfooter,\nheader,\narticle,\na,\nb,\nem,\nnav,\nform,\ninput,\ntextarea,\nselect,\nbutton,\ni,\nh1,\nh2,\nh3,\nh4,\nh5,\nh6 {\n  padding: 0;\n  margin: 0;\n  border: none;\n  list-style: none;\n  text-decoration: none;\n  box-sizing: border-box;\n}\ninput:focus,\ntextarea:focus,\nbutton:focus {\n  outline: none;\n}\nbody {\n  font: 14px/1.5 \"Helvetica Neue\", Helvetica, Arial, \"Microsoft Yahei\", \"Hiragino Sans GB\", \"Heiti SC\", \"WenQuanYi Micro Hei\", sans-serif;\n  color: #040404;\n  background: #eee;\n}\nhtml,\nbody {\n  width: 100%;\n  height: 100%;\n  -webkit-text-size-adjust: 100%;\n}\nheader,\nnav,\nfooter,\narticle {\n  display: block;\n}\na {\n  background-color: transparent;\n  -webkit-text-decoration-skip: objects;\n}\na:active,\na:hover {\n  outline-width: 0;\n}\n::-webkit-input-placeholder {\n  color: inherit;\n  opacity: 0.54;\n}\n::-webkit-file-upload-button {\n  -webkit-appearance: button;\n  font: inherit;\n}\n.scrolling {\n  overflow-y: scroll!important;\n  -webkit-overflow-scrolling: touch!important;\n}\n.red {\n  color: red;\n}\nimg {\n  border: none;\n  max-width: 100%;\n}\n/*! flex.css v1.2.2 | 狼族小狈 https://github.com/1340641314/flex */\n/*\n    定义flex布局\n*/\n[data-flex] {\n  overflow: hidden;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n[data-flex] > * {\n  display: block;\n  overflow: hidden;\n}\n[data-flex] > [data-flex] {\n  overflow: hidden;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n/*\n        主轴方向：从左到右(默认)\n    */\n[data-flex~=\"dir:left\"] {\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n}\n/*\n        主轴方向：从右到左\n    */\n[data-flex~=\"dir:right\"] {\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: reverse;\n      -ms-flex-direction: row-reverse;\n          flex-direction: row-reverse;\n}\n/*\n        主轴方向：从上到下\n    */\n[data-flex~=\"dir:top\"] {\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n}\n/*\n        主轴方向：从下到上\n    */\n[data-flex~=\"dir:bottom\"] {\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: reverse;\n      -ms-flex-direction: column-reverse;\n          flex-direction: column-reverse;\n}\n/*\n        主轴对齐方式：从左到右(默认)\n    */\n[data-flex~=\"main:left\"] {\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n}\n/*\n        主轴对齐方式：从右到左\n    */\n[data-flex~=\"main:right\"] {\n  -webkit-box-pack: end;\n      -ms-flex-pack: end;\n          justify-content: flex-end;\n}\n/*\n        主轴对齐方式：两端对齐\n    */\n[data-flex~=\"main:justify\"] {\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n/*\n        主轴对齐方式：居中对齐\n    */\n[data-flex~=\"main:center\"] {\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n}\n/*\n        交叉轴齐方式：从上到下(默认)\n    */\n[data-flex~=\"cross:top\"] {\n  -webkit-box-align: start;\n      -ms-flex-align: start;\n              -ms-grid-row-align: flex-start;\n          align-items: flex-start;\n}\n/*\n        交叉轴齐方式：从下到上\n    */\n[data-flex~=\"cross:bottom\"] {\n  -webkit-box-align: end;\n      -ms-flex-align: end;\n              -ms-grid-row-align: flex-end;\n          align-items: flex-end;\n}\n/*\n        交叉轴齐方式：居中对齐\n    */\n[data-flex~=\"cross:center\"] {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n              -ms-grid-row-align: center;\n          align-items: center;\n}\n/*\n        交叉轴齐方式：跟随内容高度对齐\n    */\n[data-flex~=\"cross:baseline\"] {\n  -webkit-box-align: baseline;\n      -ms-flex-align: baseline;\n              -ms-grid-row-align: baseline;\n          align-items: baseline;\n}\n/*\n        交叉轴齐方式：高度并排铺满\n    */\n[data-flex~=\"cross:stretch\"] {\n  -webkit-box-align: stretch;\n      -ms-flex-align: stretch;\n              -ms-grid-row-align: stretch;\n          align-items: stretch;\n}\n/*\n        子元素平分宽度\n    */\n[data-flex~=\"box:mean\"] > *,\n[data-flex~=\"box:first\"] > *,\n[data-flex~=\"box:last\"] > *,\n[data-flex~=\"box:justify\"] > * {\n  width: 0%;\n  height: auto;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  -ms-flex-negative: 1;\n      flex-shrink: 1;\n}\n[data-flex~=\"box:first\"] > *:first-child,\n[data-flex~=\"box:last\"] > *:last-child,\n[data-flex~=\"box:justify\"] > *:first-child,\n[data-flex~=\"box:justify\"] > *:last-child {\n  width: auto;\n  -webkit-box-flex: 0;\n      -ms-flex-positive: 0;\n          flex-grow: 0;\n  -ms-flex-negative: 0;\n      flex-shrink: 0;\n}\n/*\n        子元素平分高度\n    */\n[data-flex~=\"dir:top\"][data-flex~=\"box:mean\"] > *,\n[data-flex~=\"dir:top\"][data-flex~=\"box:first\"] > *,\n[data-flex~=\"dir:top\"][data-flex~=\"box:last\"] > *,\n[data-flex~=\"dir:top\"][data-flex~=\"box:justify\"] > *,\n[data-flex~=\"dir:bottom\"][data-flex~=\"box:mean\"] > *,\n[data-flex~=\"dir:bottom\"][data-flex~=\"box:first\"] > *,\n[data-flex~=\"dir:bottom\"][data-flex~=\"box:last\"] > *,\n[data-flex~=\"dir:bottom\"][data-flex~=\"box:justify\"] > * {\n  width: auto;\n  height: 0;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  -ms-flex-negative: 1;\n      flex-shrink: 1;\n}\n[data-flex~=\"dir:top\"][data-flex~=\"box:first\"] > *:first-child,\n[data-flex~=\"dir:top\"][data-flex~=\"box:last\"] > *:last-child,\n[data-flex~=\"dir:top\"][data-flex~=\"box:justify\"] > *:first-child,\n[data-flex~=\"dir:top\"][data-flex~=\"box:justify\"] > *:last-child,\n[data-flex~=\"dir:bottom\"][data-flex~=\"box:first\"] > *:first-child,\n[data-flex~=\"dir:bottom\"][data-flex~=\"box:last\"] > *:last-child,\n[data-flex~=\"dir:bottom\"][data-flex~=\"box:justify\"] > *:first-child [data-flex~=\"dir:bottom\"][data-flex~=\"box:justify\"] > *:last-child {\n  height: auto;\n  -webkit-box-flex: 0;\n      -ms-flex-positive: 0;\n          flex-grow: 0;\n  -ms-flex-negative: 0;\n      flex-shrink: 0;\n}\n[data-flex-box=\"1\"] {\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  -ms-flex-negative: 1;\n      flex-shrink: 1;\n}\n[data-flex-box=\"2\"] {\n  -webkit-box-flex: 2;\n      -ms-flex-positive: 2;\n          flex-grow: 2;\n  -ms-flex-negative: 2;\n      flex-shrink: 2;\n}\n[data-flex-box=\"3\"] {\n  -webkit-box-flex: 3;\n      -ms-flex-positive: 3;\n          flex-grow: 3;\n  -ms-flex-negative: 3;\n      flex-shrink: 3;\n}\n[data-flex-box=\"4\"] {\n  -webkit-box-flex: 4;\n      -ms-flex-positive: 4;\n          flex-grow: 4;\n  -ms-flex-negative: 4;\n      flex-shrink: 4;\n}\n[data-flex-box=\"5\"] {\n  -webkit-box-flex: 5;\n      -ms-flex-positive: 5;\n          flex-grow: 5;\n  -ms-flex-negative: 5;\n      flex-shrink: 5;\n}\n[data-flex-box=\"6\"] {\n  -webkit-box-flex: 6;\n      -ms-flex-positive: 6;\n          flex-grow: 6;\n  -ms-flex-negative: 6;\n      flex-shrink: 6;\n}\n[data-flex-box=\"7\"] {\n  -webkit-box-flex: 7;\n      -ms-flex-positive: 7;\n          flex-grow: 7;\n  -ms-flex-negative: 7;\n      flex-shrink: 7;\n}\n[data-flex-box=\"8\"] {\n  -webkit-box-flex: 8;\n      -ms-flex-positive: 8;\n          flex-grow: 8;\n  -ms-flex-negative: 8;\n      flex-shrink: 8;\n}\n[data-flex-box=\"9\"] {\n  -webkit-box-flex: 9;\n      -ms-flex-positive: 9;\n          flex-grow: 9;\n  -ms-flex-negative: 9;\n      flex-shrink: 9;\n}\n[data-flex-box=\"10\"] {\n  -webkit-box-flex: 10;\n      -ms-flex-positive: 10;\n          flex-grow: 10;\n  -ms-flex-negative: 10;\n      flex-shrink: 10;\n}\n/*\n    公共头部\n*/\n.common-header {\n  height: 50px;\n  background: red;\n}\n.common-header .icon {\n  width: 50px;\n  height: 50px;\n}\n.common-header .icon a {\n  display: block;\n  color: #fff;\n}\n.common-header .iconfont {\n  font-size: 24px;\n}\n.common-header .title {\n  line-height: 50px;\n  text-align: center;\n  color: #fff;\n  font-size: 16px;\n}\n/*\n    文章列表\n*/\n.article-list {\n  background: #fff;\n}\n.article-list li {\n  padding: 10px;\n}\n.article-list li + li {\n  border-top: 1px solid #eee;\n}\n.article-list h3 {\n  color: #222;\n}\n.article-list .content {\n  font-size: 13px;\n  color: #999;\n}\n.article-list .bottom {\n  padding-top: 5px;\n}\n.article-list .bottom .click {\n  font-size: 12px;\n  color: #ccc;\n}\n.article-list .bottom .to a {\n  font-size: 12px;\n  color: #1a43a8;\n}\n/*\n    数据正在加载中\n*/\n.data-load-0 {\n  margin: 20px auto 20px auto;\n  position: relative;\n  -webkit-animation: rotate-forever 1s infinite linear;\n          animation: rotate-forever 1s infinite linear;\n  height: 30px;\n  width: 30px;\n  border: 4px solid red;\n  border-right-color: transparent;\n  border-radius: 50%;\n}\n.data-load-0 .msg {\n  display: none;\n}\n.data-load .msg {\n  line-height: 70px;\n  text-align: center;\n  font-size: 14px;\n}\n@-webkit-keyframes rotate-forever {\n  0% {\n    -webkit-transform: rotate(0deg);\n            transform: rotate(0deg);\n  }\n  100% {\n    -webkit-transform: rotate(360deg);\n            transform: rotate(360deg);\n  }\n}\n@keyframes rotate-forever {\n  0% {\n    -webkit-transform: rotate(0deg);\n            transform: rotate(0deg);\n  }\n  100% {\n    -webkit-transform: rotate(360deg);\n            transform: rotate(360deg);\n  }\n}\n/*\n    分类\n*/\n.class {\n  overflow: hidden;\n  background: #fff;\n}\n.class ul {\n  overflow: hidden;\n  padding: 10px 10px 0 10px;\n}\n.class li {\n  float: left;\n  width: 25%;\n  margin-bottom: 10px;\n}\n.class li a {\n  display: block;\n  text-align: center;\n  font-size: 14px;\n  font-weight: bolder;\n  color: #222;\n}\n/*\n    文章详情\n*/\n.article-view {\n  padding: 10px;\n}\n.article-view h2 {\n  font-weight: bolder;\n  font-size: 16px;\n  color: #222;\n}\n.article-view .yue {\n  text-align: right;\n  font-size: 12px;\n  color: #999;\n}\n.article-view article {\n  padding: 10px 0;\n  font-size: 14px;\n  color: #222;\n}\n/*\n    关于我们\n*/\n.about {\n  padding: 40px;\n  text-align: center;\n  font-size: 14px;\n  color: #666;\n}\n.about .pictrue {\n  overflow: hidden;\n  width: 200px;\n  height: 200px;\n  margin: 0 auto;\n}\n.about .pictrue img {\n  width: inherit;\n  height: inherit;\n  border: none;\n}\n.about .info {\n  padding-top: 20px;\n}\n.about a {\n  color: #3290e6;\n}\n", ""]);
+	exports.push([module.id, "html,\nbody,\ndiv,\nul,\nli,\np,\nfooter,\nheader,\narticle,\na,\nb,\nem,\nnav,\nform,\ninput,\ntextarea,\nselect,\nbutton,\ni,\nh1,\nh2,\nh3,\nh4,\nh5,\nh6 {\n  padding: 0;\n  margin: 0;\n  border: none;\n  list-style: none;\n  text-decoration: none;\n  box-sizing: border-box;\n}\ninput:focus,\ntextarea:focus,\nbutton:focus {\n  outline: none;\n}\nbody {\n  font: 14px/1.5 \"Helvetica Neue\", Helvetica, Arial, \"Microsoft Yahei\", \"Hiragino Sans GB\", \"Heiti SC\", \"WenQuanYi Micro Hei\", sans-serif;\n  color: #040404;\n  background: #eee;\n}\nhtml,\nbody {\n  width: 100%;\n  height: 100%;\n  -webkit-text-size-adjust: 100%;\n}\nheader,\nnav,\nfooter,\narticle {\n  display: block;\n}\na {\n  background-color: transparent;\n  -webkit-text-decoration-skip: objects;\n}\na:active,\na:hover {\n  outline-width: 0;\n}\n::-webkit-input-placeholder {\n  color: inherit;\n  opacity: 0.54;\n}\n::-webkit-file-upload-button {\n  -webkit-appearance: button;\n  font: inherit;\n}\n.scrolling {\n  overflow-y: scroll!important;\n  -webkit-overflow-scrolling: touch!important;\n}\n.red {\n  color: red;\n}\nimg {\n  border: none;\n  max-width: 100%;\n}\n/*! flex.css v1.2.2 | 狼族小狈 https://github.com/1340641314/flex */\n/*\n    定义flex布局\n*/\n[data-flex] {\n  overflow: hidden;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n[data-flex] > * {\n  display: block;\n  overflow: hidden;\n}\n[data-flex] > [data-flex] {\n  overflow: hidden;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n/*\n        主轴方向：从左到右(默认)\n    */\n[data-flex~=\"dir:left\"] {\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n}\n/*\n        主轴方向：从右到左\n    */\n[data-flex~=\"dir:right\"] {\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: reverse;\n      -ms-flex-direction: row-reverse;\n          flex-direction: row-reverse;\n}\n/*\n        主轴方向：从上到下\n    */\n[data-flex~=\"dir:top\"] {\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n}\n/*\n        主轴方向：从下到上\n    */\n[data-flex~=\"dir:bottom\"] {\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: reverse;\n      -ms-flex-direction: column-reverse;\n          flex-direction: column-reverse;\n}\n/*\n        主轴对齐方式：从左到右(默认)\n    */\n[data-flex~=\"main:left\"] {\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n}\n/*\n        主轴对齐方式：从右到左\n    */\n[data-flex~=\"main:right\"] {\n  -webkit-box-pack: end;\n      -ms-flex-pack: end;\n          justify-content: flex-end;\n}\n/*\n        主轴对齐方式：两端对齐\n    */\n[data-flex~=\"main:justify\"] {\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n/*\n        主轴对齐方式：居中对齐\n    */\n[data-flex~=\"main:center\"] {\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n}\n/*\n        交叉轴齐方式：从上到下(默认)\n    */\n[data-flex~=\"cross:top\"] {\n  -webkit-box-align: start;\n      -ms-flex-align: start;\n              -ms-grid-row-align: flex-start;\n          align-items: flex-start;\n}\n/*\n        交叉轴齐方式：从下到上\n    */\n[data-flex~=\"cross:bottom\"] {\n  -webkit-box-align: end;\n      -ms-flex-align: end;\n              -ms-grid-row-align: flex-end;\n          align-items: flex-end;\n}\n/*\n        交叉轴齐方式：居中对齐\n    */\n[data-flex~=\"cross:center\"] {\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n              -ms-grid-row-align: center;\n          align-items: center;\n}\n/*\n        交叉轴齐方式：跟随内容高度对齐\n    */\n[data-flex~=\"cross:baseline\"] {\n  -webkit-box-align: baseline;\n      -ms-flex-align: baseline;\n              -ms-grid-row-align: baseline;\n          align-items: baseline;\n}\n/*\n        交叉轴齐方式：高度并排铺满\n    */\n[data-flex~=\"cross:stretch\"] {\n  -webkit-box-align: stretch;\n      -ms-flex-align: stretch;\n              -ms-grid-row-align: stretch;\n          align-items: stretch;\n}\n/*\n        子元素平分宽度\n    */\n[data-flex~=\"box:mean\"] > *,\n[data-flex~=\"box:first\"] > *,\n[data-flex~=\"box:last\"] > *,\n[data-flex~=\"box:justify\"] > * {\n  width: 0%;\n  height: auto;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  -ms-flex-negative: 1;\n      flex-shrink: 1;\n}\n[data-flex~=\"box:first\"] > *:first-child,\n[data-flex~=\"box:last\"] > *:last-child,\n[data-flex~=\"box:justify\"] > *:first-child,\n[data-flex~=\"box:justify\"] > *:last-child {\n  width: auto;\n  -webkit-box-flex: 0;\n      -ms-flex-positive: 0;\n          flex-grow: 0;\n  -ms-flex-negative: 0;\n      flex-shrink: 0;\n}\n/*\n        子元素平分高度\n    */\n[data-flex~=\"dir:top\"][data-flex~=\"box:mean\"] > *,\n[data-flex~=\"dir:top\"][data-flex~=\"box:first\"] > *,\n[data-flex~=\"dir:top\"][data-flex~=\"box:last\"] > *,\n[data-flex~=\"dir:top\"][data-flex~=\"box:justify\"] > *,\n[data-flex~=\"dir:bottom\"][data-flex~=\"box:mean\"] > *,\n[data-flex~=\"dir:bottom\"][data-flex~=\"box:first\"] > *,\n[data-flex~=\"dir:bottom\"][data-flex~=\"box:last\"] > *,\n[data-flex~=\"dir:bottom\"][data-flex~=\"box:justify\"] > * {\n  width: auto;\n  height: 0;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  -ms-flex-negative: 1;\n      flex-shrink: 1;\n}\n[data-flex~=\"dir:top\"][data-flex~=\"box:first\"] > *:first-child,\n[data-flex~=\"dir:top\"][data-flex~=\"box:last\"] > *:last-child,\n[data-flex~=\"dir:top\"][data-flex~=\"box:justify\"] > *:first-child,\n[data-flex~=\"dir:top\"][data-flex~=\"box:justify\"] > *:last-child,\n[data-flex~=\"dir:bottom\"][data-flex~=\"box:first\"] > *:first-child,\n[data-flex~=\"dir:bottom\"][data-flex~=\"box:last\"] > *:last-child,\n[data-flex~=\"dir:bottom\"][data-flex~=\"box:justify\"] > *:first-child [data-flex~=\"dir:bottom\"][data-flex~=\"box:justify\"] > *:last-child {\n  height: auto;\n  -webkit-box-flex: 0;\n      -ms-flex-positive: 0;\n          flex-grow: 0;\n  -ms-flex-negative: 0;\n      flex-shrink: 0;\n}\n[data-flex-box=\"1\"] {\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  -ms-flex-negative: 1;\n      flex-shrink: 1;\n}\n[data-flex-box=\"2\"] {\n  -webkit-box-flex: 2;\n      -ms-flex-positive: 2;\n          flex-grow: 2;\n  -ms-flex-negative: 2;\n      flex-shrink: 2;\n}\n[data-flex-box=\"3\"] {\n  -webkit-box-flex: 3;\n      -ms-flex-positive: 3;\n          flex-grow: 3;\n  -ms-flex-negative: 3;\n      flex-shrink: 3;\n}\n[data-flex-box=\"4\"] {\n  -webkit-box-flex: 4;\n      -ms-flex-positive: 4;\n          flex-grow: 4;\n  -ms-flex-negative: 4;\n      flex-shrink: 4;\n}\n[data-flex-box=\"5\"] {\n  -webkit-box-flex: 5;\n      -ms-flex-positive: 5;\n          flex-grow: 5;\n  -ms-flex-negative: 5;\n      flex-shrink: 5;\n}\n[data-flex-box=\"6\"] {\n  -webkit-box-flex: 6;\n      -ms-flex-positive: 6;\n          flex-grow: 6;\n  -ms-flex-negative: 6;\n      flex-shrink: 6;\n}\n[data-flex-box=\"7\"] {\n  -webkit-box-flex: 7;\n      -ms-flex-positive: 7;\n          flex-grow: 7;\n  -ms-flex-negative: 7;\n      flex-shrink: 7;\n}\n[data-flex-box=\"8\"] {\n  -webkit-box-flex: 8;\n      -ms-flex-positive: 8;\n          flex-grow: 8;\n  -ms-flex-negative: 8;\n      flex-shrink: 8;\n}\n[data-flex-box=\"9\"] {\n  -webkit-box-flex: 9;\n      -ms-flex-positive: 9;\n          flex-grow: 9;\n  -ms-flex-negative: 9;\n      flex-shrink: 9;\n}\n[data-flex-box=\"10\"] {\n  -webkit-box-flex: 10;\n      -ms-flex-positive: 10;\n          flex-grow: 10;\n  -ms-flex-negative: 10;\n      flex-shrink: 10;\n}\n/*\n    公共头部\n*/\n.common-header {\n  height: 50px;\n  background: red;\n}\n.common-header .icon {\n  width: 50px;\n  height: 50px;\n}\n.common-header .icon a {\n  display: block;\n  color: #fff;\n}\n.common-header .iconfont {\n  font-size: 24px;\n}\n.common-header .title {\n  line-height: 50px;\n  text-align: center;\n  color: #fff;\n  font-size: 16px;\n}\n/*\n    文章列表\n*/\n.article-list li {\n  padding: 10px;\n  margin-bottom: 10px;\n  box-shadow: 1px 1px 3px #ccc;\n  background: #fff;\n}\n.article-list li + li {\n  border-top: 1px solid #eee;\n}\n.article-list h3 {\n  color: #222;\n}\n.article-list .content {\n  font-size: 13px;\n  color: #999;\n}\n.article-list .bottom {\n  padding-top: 5px;\n}\n.article-list .bottom .click {\n  font-size: 12px;\n  color: #ccc;\n}\n.article-list .bottom .to a {\n  font-size: 12px;\n  color: #1a43a8;\n}\n.article-list .pictrue {\n  height: 160px;\n  background-size: cover;\n}\n/*\n    数据正在加载中\n*/\n.data-load-0 {\n  margin: 20px auto 20px auto;\n  position: relative;\n  -webkit-animation: rotate-forever 1s infinite linear;\n          animation: rotate-forever 1s infinite linear;\n  height: 30px;\n  width: 30px;\n  border: 4px solid red;\n  border-right-color: transparent;\n  border-radius: 50%;\n}\n.data-load-0 .msg {\n  display: none;\n}\n.data-load .msg {\n  line-height: 70px;\n  text-align: center;\n  font-size: 14px;\n}\n@-webkit-keyframes rotate-forever {\n  0% {\n    -webkit-transform: rotate(0deg);\n            transform: rotate(0deg);\n  }\n  100% {\n    -webkit-transform: rotate(360deg);\n            transform: rotate(360deg);\n  }\n}\n@keyframes rotate-forever {\n  0% {\n    -webkit-transform: rotate(0deg);\n            transform: rotate(0deg);\n  }\n  100% {\n    -webkit-transform: rotate(360deg);\n            transform: rotate(360deg);\n  }\n}\n/*\n    分类\n*/\n.class {\n  overflow: hidden;\n  background: #fff;\n}\n.class ul {\n  overflow: hidden;\n  padding: 10px 10px 0 10px;\n}\n.class li {\n  float: left;\n  width: 25%;\n  margin-bottom: 10px;\n}\n.class li a {\n  display: block;\n  text-align: center;\n  font-size: 14px;\n  font-weight: bolder;\n  color: #222;\n}\n/*\n    文章详情\n*/\n.article-view {\n  padding: 10px;\n}\n.article-view h2 {\n  font-weight: bolder;\n  font-size: 16px;\n  color: #222;\n}\n.article-view .yue {\n  text-align: right;\n  font-size: 12px;\n  color: #999;\n}\n.article-view article {\n  padding: 10px 0;\n  font-size: 14px;\n  color: #222;\n}\n/*\n    关于我们\n*/\n.about {\n  padding: 40px;\n  text-align: center;\n  font-size: 14px;\n  color: #666;\n}\n.about .pictrue {\n  overflow: hidden;\n  width: 200px;\n  height: 200px;\n  margin: 0 auto;\n}\n.about .pictrue img {\n  width: inherit;\n  height: inherit;\n  border: none;\n}\n.about .info {\n  padding-top: 20px;\n}\n.about a {\n  color: #3290e6;\n}\n/*\n    底部菜单栏\n*/\n.common-footer .zhanwei {\n  height: 50px;\n}\n.common-footer .menu {\n  position: fixed;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  height: 50px;\n  z-index: 999;\n  background: red;\n}\n.common-footer .menu a {\n  font-size: 14px;\n  display: block;\n  line-height: 50px;\n  text-align: center;\n  color: #fff;\n  opacity: 0.8;\n}\n.common-footer .menu .on a {\n  opacity: 1;\n}\n.common-footer .menu .iconfont {\n  padding-right: 5px;\n}\n", ""]);
 
 	// exports
 
@@ -29231,7 +29309,7 @@
 
 
 	// module
-	exports.push([module.id, "\n@font-face {font-family: \"iconfont\";\n  src: url(" + __webpack_require__(269) + "); /* IE9*/\n  src: url(" + __webpack_require__(269) + "#iefix) format('embedded-opentype'), \n  url(" + __webpack_require__(270) + ") format('woff'), \n  url(" + __webpack_require__(271) + ") format('truetype'), \n  url(" + __webpack_require__(272) + "#iconfont) format('svg'); /* iOS 4.1- */\n}\n\n.iconfont {\n  font-family:\"iconfont\" !important;\n  font-size:16px;\n  font-style:normal;\n  -webkit-font-smoothing: antialiased;\n  -webkit-text-stroke-width: 0.2px;\n  -moz-osx-font-smoothing: grayscale;\n}\n.icon-caidan:before { content: \"\\E600\"; }\n.icon-guanyu:before { content: \"\\E603\"; }\n.icon-fanhui:before { content: \"\\E602\"; }\n", ""]);
+	exports.push([module.id, "\n@font-face {font-family: \"iconfont\";\n  src: url(" + __webpack_require__(269) + "); /* IE9*/\n  src: url(" + __webpack_require__(269) + "#iefix) format('embedded-opentype'), \n  url(" + __webpack_require__(270) + ") format('woff'), \n  url(" + __webpack_require__(271) + ") format('truetype'), \n  url(" + __webpack_require__(272) + "#iconfont) format('svg'); /* iOS 4.1- */\n}\n\n.iconfont {\n  font-family:\"iconfont\" !important;\n  font-size:16px;\n  font-style:normal;\n  -webkit-font-smoothing: antialiased;\n  -webkit-text-stroke-width: 0.2px;\n  -moz-osx-font-smoothing: grayscale;\n}\n.icon-zhuye:before { content: \"\\E601\"; }\n.icon-caidan:before { content: \"\\E600\"; }\n.icon-guanyu:before { content: \"\\E603\"; }\n.icon-fanhui:before { content: \"\\E602\"; }\n", ""]);
 
 	// exports
 

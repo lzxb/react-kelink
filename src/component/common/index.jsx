@@ -57,3 +57,31 @@ export class Loading extends Component {
     }
 }
 
+export class Footer extends Component {
+    render() {
+        let arr = [];
+        arr[this.props.index] = 'on';
+        return (
+            <footer className="common-footer">
+                <div className="zhanwei"></div>
+                <ul className="menu" data-flex="box:mean">
+                    <li className={arr[0]}>
+                        <Link to="/">
+                            <i className="iconfont icon-zhuye"></i>首页
+                        </Link>
+                    </li>
+                    <li className={arr[1]}>
+                        <Link to="/menu">
+                            <i className="iconfont icon-caidan"></i>分类
+                        </Link>
+                    </li>
+                    <li className={arr[2]}>
+                        <Link to="/about">
+                            <i className="iconfont icon-guanyu"></i>关于
+                        </Link>
+                    </li>
+                </ul>
+            </footer>
+        );
+    }
+}

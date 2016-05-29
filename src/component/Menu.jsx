@@ -9,7 +9,7 @@ import action from '../action/index';
 
 import Tool from '../lib/Tool/Tool';
 import config from '../config/config';
-import {Header, Loading} from './common/index';
+import {Header, Footer, Loading} from './common/index';
 
 class Menu extends Component {
     constructor(props) {
@@ -56,8 +56,9 @@ class Menu extends Component {
         }
         return (
             <div>
-                <Header leftTo="/" leftIcon="fanhui" title="分类" />
+                <Header title="分类" />
                 {main}
+                <Footer index="1"/>
             </div>
         );
     }
@@ -76,7 +77,8 @@ class MenuList extends Component {
                 <ul>
                     {
                         this.props.list.map((item, index) => {
-                            let {classname, classid}  = item;
+                            let {classname, classid, typePath}  = item;
+                            if(typePath !== 'article/index.aspx') return false;
                             return (
                                 <li key={index}>
                                     <Link to={'/?classid=' + classid}>{classname}</Link>

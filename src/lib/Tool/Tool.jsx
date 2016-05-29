@@ -56,7 +56,7 @@ Tool.ajax = function (mySetting) {
             var response = xhr.responseText;
             //将服务器返回的数据，转换成json
 
-            if (/application\/json/.test(head) || setting.dataType === 'json') {
+            if (/application\/json/.test(head) || setting.dataType === 'json' && /^\[([\s\S])*?\]$/.test(response)) {
                 response = JSON.parse(response);
             }
 

@@ -7,20 +7,20 @@ app.use(express.static(__dirname + '/static'))
 
 //获取所有的栏目
 app.get('/wapindex.aspx', function (req, res) {
-    axios.get('http://meirongwu.cn/wapindex.aspx?&output=json&classid=' + req.query.classid).then(function (data) {
+    axios.get('http://xk-web.kelink.com/wapindex.aspx?&output=json&classid=' + req.query.classid).then(function (data) {
         res.send(data.data);
     })
 });
 
 //获取文章列表
 app.get('/article/list.aspx', function (req, res) {
-    axios.get('http://meirongwu.cn/article/list.aspx?&output=json&classid=' + req.query.classid + '&action=' + req.query.action + '&page=' + (req.query.page || 1)).then(function (data) {
+    axios.get('http://xk-web.kelink.com/article/list.aspx?&output=json&classid=' + req.query.classid + '&action=' + req.query.action + '&page=' + (req.query.page || 1)).then(function (data) {
         res.send(data.data);
     })
 });
 //获取文章内容
 app.get('/article/view.aspx', function (req, res) {
-    axios.get('http://meirongwu.cn/article/view.aspx?&output=json&id=' + req.query.id).then(function (data) {
+    axios.get('http://xk-web.kelink.com/article/view.aspx?&output=json&id=' + req.query.id).then(function (data) {
         res.send(data.data);
     })
 });

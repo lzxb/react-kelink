@@ -35,9 +35,11 @@
 */
 
 .article-list {
-    background: #fff;
     li {
         padding: 10px;
+        margin-bottom: 10px;
+        box-shadow: 1px 1px 3px #ccc;
+        background: #fff;
         &+li {
             border-top: 1px solid #eee;
         }
@@ -61,6 +63,10 @@
                 color: #1a43a8;
             }
         }
+    }
+    .pictrue {
+        height: 160px;
+        background-size: cover;
     }
 }
 
@@ -176,5 +182,41 @@
     }
     a {
         color: #3290e6;
+    }
+}
+
+
+/*
+    底部菜单栏
+*/
+
+.common-footer {
+    .zhanwei {
+        height: 50px;
+    }
+    .menu {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        height: 50px;
+        z-index: 999;
+        background: @main-color;
+        a {
+            font-size: 14px;
+            display: block;
+            line-height: 50px;
+            text-align: center;
+            color: #fff;
+            opacity: 0.8;
+        }
+        .on {
+            a {
+                opacity: 1;
+            }
+        }
+        .iconfont {
+            padding-right: 5px;
+        }
     }
 }
