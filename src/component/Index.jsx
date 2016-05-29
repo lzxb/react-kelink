@@ -47,6 +47,7 @@ class Index extends Component {
             let {DB, GET_DATA_START, GET_DATA_SUCCESS, GET_DATA_ERROR} = props;
             let classid = DB.classid[this.classid];
             let data = {
+                siteid: config.siteid,
                 classid: this.classid,
                 action: 'new',
                 page: classid.page,

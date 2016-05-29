@@ -28,7 +28,7 @@ class Menu extends Component {
             let {DB, GET_DATA_SUCCESS, GET_DATA_ERROR} = this.props;
             window.scrollTo(DB.scrollX, DB.scrollY); //设置滚动条位置
             if(DB.loadState !== 2) {
-                this.ajax = Tool.get('/wapindex.aspx', {output: 'json', classid: config.indexClassId}, GET_DATA_SUCCESS, GET_DATA_ERROR);
+                this.ajax = Tool.get('/wapindex.aspx', {output: 'json',siteid: config.siteid, classid: config.indexClassId}, GET_DATA_SUCCESS, GET_DATA_ERROR);
             }
         }
         

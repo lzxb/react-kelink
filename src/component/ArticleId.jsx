@@ -48,6 +48,7 @@ class ArticleId extends Component {
     componentDidMount() {
         this.ajax = Tool.get('/article/view.aspx', {
             output: 'json',
+            siteid: config.siteid,
             id: this.props.params.id
         }, (data) => {
             this.setState({
