@@ -27503,12 +27503,19 @@
 	            if (_Tool2.default.isArray(data)) {
 	                main = _react2.default.createElement(ArticleList, { list: data });
 	            }
-	            var index = this.classid === _config2.default.indexClassId ? 0 : 1;
+	            var index = 0;
+	            var leftTo = null;
+	            var leftIcon = null;
+	            if (this.classid !== _config2.default.indexClassId) {
+	                index = 1;
+	                leftTo = '/menu';
+	                leftIcon = 'fanhui';
+	            }
 
 	            return _react2.default.createElement(
 	                'div',
 	                null,
-	                _react2.default.createElement(_index3.Header, { title: title }),
+	                _react2.default.createElement(_index3.Header, { leftTo: leftTo, leftIcon: leftIcon, title: title }),
 	                main,
 	                _react2.default.createElement(
 	                    'div',

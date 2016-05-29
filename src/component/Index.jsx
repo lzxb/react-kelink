@@ -120,11 +120,18 @@ class Index extends Component {
         if (Tool.isArray(data)) {
             main = (<ArticleList list={data} />);
         }
-        let index = this.classid === config.indexClassId ? 0 : 1;
+        let index = 0;
+        let leftTo = null;
+        let leftIcon = null;
+        if (this.classid !== config.indexClassId) {
+            index = 1;
+            leftTo = '/menu';
+            leftIcon = 'fanhui';
+        }
         
         return (
             <div>
-                <Header title={title} />
+                <Header leftTo={leftTo} leftIcon={leftIcon} title={title} />
                 {main}
                 <div ref="dataload"><Loading loadState={loadState} loadMsg={loadMsg} /></div>
                 <Footer index={index}/>
