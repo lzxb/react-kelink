@@ -18,9 +18,10 @@
 1.安装nodejs环境：https://nodejs.org/en/
 2.打开cmd命令，移动到项目目录
 3.执行cmd命令安装依赖模块： npm install
-4.运行服务器：npm start
+4.运行服务器：npm start 
 5.发布应用：webpack -p
 6.修改代码自动编译：npm -w
+7.浏览器访问：http://localhost:3000/
 ```
 
 演示地址：http://meirongwu.cn/webapp.html
