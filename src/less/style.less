@@ -10,6 +10,7 @@
 .common-header {
     height: 50px;
     background: @main-color;
+    animation: move-down 0.3s ease-out;
     .icon {
         width: 50px;
         height: 50px;
@@ -26,6 +27,15 @@
         text-align: center;
         color: #fff;
         font-size: 16px;
+    }
+}
+
+@keyframes move-down {
+    0% {
+        transform: translate(0, -10px);
+    }
+    100% {
+        transform: translate(0, 0);
     }
 }
 
