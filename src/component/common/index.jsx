@@ -88,6 +88,11 @@ export class Footer extends Component {
                             <i className="iconfont icon-gerenzhongxin"></i>我的
                         </Link>
                     </li>
+                    <li className={arr[3]}>
+                        <Link to="/user">
+                            <i className="iconfont icon-gerenzhongxin"></i>我的
+                        </Link>
+                    </li>
                 </ul>
             </footer>
         );

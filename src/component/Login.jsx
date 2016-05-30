@@ -17,7 +17,11 @@ class User extends Component {
     render() {
         return (
             <div>
+<<<<<<< HEAD
                 <Header leftIcon="fanhui" title="登录" />
+=======
+                <Header title="登录" />
+>>>>>>> 4d1067ce1956f9b98d861e3bcb9198ca8fc326e9
                 <div className="login">
                     <div className="line" data-flex="box:first">
                         <div className="key" data-flex="box:mean">
@@ -40,6 +44,10 @@ class User extends Component {
                     </div>
                     <div className="btn">登录</div>
                 </div>
+<<<<<<< HEAD
+=======
+                <Footer index="3"/>
+>>>>>>> 4d1067ce1956f9b98d861e3bcb9198ca8fc326e9
             </div>
         );
     }
