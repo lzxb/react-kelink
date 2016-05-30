@@ -2,7 +2,6 @@
 @import './resets.less';
 @import './data-flex.less';
 @main-color: red;
-
 /*
     公共头部
 */
@@ -231,5 +230,45 @@
         .iconfont {
             padding-right: 5px;
         }
+    }
+}
+
+
+/*
+    登录
+*/
+
+.login {
+    padding-top: 100px;
+    .line {
+        padding: 10px 10%;
+        .key {
+            width: 50px;
+            padding-right: 10px;
+            line-height: 34px;
+            font-size: 14px;
+        }
+        .value {
+            font-size: 14px;
+            overflow: hidden;
+            padding: 5px 10px;
+            border-radius: 5px;
+            background: #fff;
+            input {
+                width: 100%;
+                line-height: 24px;
+                background: transparent;
+            }
+        }
+    }
+    .btn {
+        margin: 50px 10%;
+        font-size: 16px;
+        font-weight: bolder;
+        line-height: 38px;
+        border-radius: 8px;
+        text-align: center;
+        color: #fff;
+        background: @main-color;
     }
 }

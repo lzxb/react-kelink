@@ -4,14 +4,14 @@ import {Link} from 'react-router';
 /*
     全局公共头部
 */
-export class Header extends Component{
+export class Header extends Component {
     constructor(props) {
         super(props);
     }
     render() {
         let {title, leftTo, leftIcon, rightTo, rightIcon } = this.props;
         let left = null;
-        
+
         if (leftTo && leftIcon) {
             left = (
                 <Link to={leftTo}>
@@ -19,9 +19,9 @@ export class Header extends Component{
                 </Link>
             );
         }
-        
+
         let right = null;
-        
+
         if (rightTo && rightIcon) {
             right = (
                 <Link to={rightTo}>
@@ -29,7 +29,7 @@ export class Header extends Component{
                 </Link>
             );
         }
-        
+
         return (
             <header className="common-header" data-flex>
                 <div className="icon" data-flex="main:center cross:center" data-flex-box="0">
@@ -78,6 +78,11 @@ export class Footer extends Component {
                     <li className={arr[2]}>
                         <Link to="/about">
                             <i className="iconfont icon-guanyu"></i>关于
+                        </Link>
+                    </li>
+                    <li className={arr[3]}>
+                        <Link to="/user">
+                            <i className="iconfont icon-gerenzhongxin"></i>我的
                         </Link>
                     </li>
                 </ul>

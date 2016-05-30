@@ -1,10 +1,10 @@
 
 @font-face {font-family: "iconfont";
-  src: url('iconfont.eot?t=1464485732'); /* IE9*/
-  src: url('iconfont.eot?t=1464485732#iefix') format('embedded-opentype'), /* IE6-IE8 */
-  url('iconfont.woff?t=1464485732') format('woff'), /* chrome, firefox */
-  url('iconfont.ttf?t=1464485732') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
-  url('iconfont.svg?t=1464485732#iconfont') format('svg'); /* iOS 4.1- */
+  src: url('iconfont.eot?t=1464511427'); /* IE9*/
+  src: url('iconfont.eot?t=1464511427#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('iconfont.woff?t=1464511427') format('woff'), /* chrome, firefox */
+  url('iconfont.ttf?t=1464511427') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('iconfont.svg?t=1464511427#iconfont') format('svg'); /* iOS 4.1- */
 }
 
 .iconfont {
@@ -17,5 +17,6 @@
 }
 .icon-zhuye:before { content: "\e601"; }
 .icon-caidan:before { content: "\e600"; }
+.icon-gerenzhongxin:before { content: "\e604"; }
 .icon-guanyu:before { content: "\e603"; }
 .icon-fanhui:before { content: "\e602"; }
