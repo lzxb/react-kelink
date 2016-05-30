@@ -1,4 +1,4 @@
-import React,{Component} from 'react';
+import React, {Component} from 'react';
 import {Link} from 'react-router';
 
 /*
@@ -17,7 +17,7 @@ class About extends Component {
     render() {
         return (
             <div>
-                <Header title="关于" />
+                <Header leftIcon="fanhui" title="关于" />
                 <div className="about">
                     <div className="saoma">
                         <div className="pictrue"><img src={erweima} /></div>
@@ -25,7 +25,6 @@ class About extends Component {
                     <div className="info">{config.indexTitle} {config.version}</div>
                     <div>github：<a href="https://github.com/1340641314/react-kelink" target="_blank">134064134</a></div>
                 </div>
-                <Footer index="2"/>
             </div>
         );
     }

@@ -1,4 +1,4 @@
-!(function (GetNext) {
+!(function(GetNext) {
     if (typeof define === 'function' && typeof define.amd === 'object' && define.amd) {
 
         define(GetNext);
@@ -7,7 +7,7 @@
     } else {
         window.GetNext = GetNext();
     }
-})(function () {
+})(function() {
     function GetNext(select, set) {
         this.el = getEl(select); //选择元素触发加载分页的元素
         /*
@@ -27,10 +27,10 @@
         /*
             回调方法
         */
-        this.startCall = set.start || function () {}; //开始加载时调用方法
-        this.loadCall = set.load || function () {}; //加载成功时调用方法
-        this.errorCall = set.error || function () {}; //开始加载时调用方法
-        this.endCall = set.end || function () {}; //加载完成时调用方法
+        this.startCall = set.start || function() {}; //开始加载时调用方法
+        this.loadCall = set.load || function() {}; //加载成功时调用方法
+        this.errorCall = set.error || function() {}; //开始加载时调用方法
+        this.endCall = set.end || function() {}; //加载完成时调用方法
 
         //监听的事件列表
         this.monitorEvent = ['DOMContentLoaded', 'load', 'click', 'touchstart', 'touchend', 'haschange', 'online', 'pageshow', 'popstate', 'resize', 'storage', 'mousewheel', 'scroll'];
@@ -47,13 +47,13 @@
     /**
      * 初始化插件
      */
-    GetNext.prototype.init = function () {
+    GetNext.prototype.init = function() {
         this.eachDOM = this.eachDOM.bind(this);
         this.readystatechange = this.readystatechange.bind(this);
         this.start();
     };
 
-    GetNext.prototype.start = function () {
+    GetNext.prototype.start = function() {
         //事件绑定
         var eventList = this.monitorEvent;
         for (let i = 0; i < eventList.length; i++) {
@@ -64,7 +64,7 @@
     /**
      * 卸载插件
      */
-    GetNext.prototype.end = function () {
+    GetNext.prototype.end = function() {
         var eventList = this.monitorEvent;
         for (let i = 0; i < eventList.length; i++) {
             window.removeEventListener(eventList[i], this.eachDOM, false);
@@ -76,7 +76,7 @@
     /**
      * 遍历DOM查询是否符合加载条件
      */
-    GetNext.prototype.eachDOM = function () {
+    GetNext.prototype.eachDOM = function() {
 
         if (this.testXhrStart()) return;
         let length = this.el.length;
@@ -92,7 +92,7 @@
      * 获取下一页数据
      * @param {object} el 触发事件的元素
      */
-    GetNext.prototype.getNextData = function (el) {
+    GetNext.prototype.getNextData = function(el) {
         if (this.testXhrStart()) return;
         this.startCall(el);
         let url = this.getUrl();
@@ -107,7 +107,7 @@
     /**
      * http请求
      */
-    GetNext.prototype.readystatechange = function () {
+    GetNext.prototype.readystatechange = function() {
         let xhr = this.xhr;
 
         if (xhr.readyState === 4) {
@@ -132,7 +132,7 @@
      * 获取发送请求的url，含参数
      * @returns {string} 返回拼接成的url地址
      */
-    GetNext.prototype.getUrl = function () {
+    GetNext.prototype.getUrl = function() {
         let data = this.data;
         let aData = [];
         let url = '';
@@ -146,7 +146,7 @@
      * 检测元素是否在可视区
      * @param {object} el 检测的元素
      */
-    GetNext.prototype.testMeet = function (el) {
+    GetNext.prototype.testMeet = function(el) {
         let bcr = el.getBoundingClientRect(); //取得元素在可视区的位置
         let mw = el.offsetWidth; //元素自身宽度
         let mh = el.offsetHeight; //元素自身的高度
@@ -164,7 +164,7 @@
      * 判断请求状态
      * @returns {boolean} true 禁止请求 false允许请求
      */
-    GetNext.prototype.testXhrStart = function () {
+    GetNext.prototype.testXhrStart = function() {
         return Boolean((this.xhr !== null) && (this.xhr && this.xhr.readyState !== 4));
     };
     /**
@@ -176,7 +176,6 @@
         switch (typeof select) {
             case 'string':
                 return document.querySelectorAll(select);
-                break;
             case 'object':
                 if (Object.prototype.toString.call(select) === '[object Array]') {
                     return select;

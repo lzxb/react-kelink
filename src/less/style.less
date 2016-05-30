@@ -9,6 +9,8 @@
 
 .common-header {
     height: 50px;
+    z-index: 999;
+    position: relative;
     background: @main-color;
     animation: move-down 0.3s ease-out;
     .icon {
@@ -226,10 +228,128 @@
         .on {
             a {
                 opacity: 1;
+                color: #ebff00;
             }
         }
         .iconfont {
             padding-right: 5px;
+        }
+    }
+}
+
+
+/*
+    登录
+*/
+
+.login {
+    padding-top: 100px;
+    .line {
+        padding: 10px 10%;
+        .key {
+            width: 50px;
+            padding-right: 10px;
+            line-height: 34px;
+            font-size: 14px;
+        }
+        .value {
+            font-size: 14px;
+            overflow: hidden;
+            padding: 5px 10px;
+            border-radius: 5px;
+            background: #fff;
+            input {
+                width: 100%;
+                line-height: 24px;
+                background: transparent;
+            }
+        }
+    }
+    .btn {
+        margin: 50px 10%;
+        font-size: 16px;
+        font-weight: bolder;
+        line-height: 38px;
+        border-radius: 8px;
+        text-align: center;
+        color: #fff;
+        background: @main-color;
+    }
+}
+
+
+/*
+    个人中心
+*/
+
+.user {
+    .head {
+        margin: -50px 0 0 0;
+        .headimg {
+            height: 250px;
+            padding-top: 50px;
+            background-image: url(images/user-bg.jpg);
+            background-size: cover;
+            background-position: center center;
+            .pictrue {
+                overflow: hidden;
+                width: 80px;
+                height: 80px;
+                border-radius: 50%;
+                box-shadow: 0 0 10px #fff, 0 0 20px #000;
+                background-size: cover;
+                background-position: center center;
+            }
+            .name {
+                padding-top: 10px;
+                font-size: 16px;
+                font-weight: bolder;
+                color: rgba(255, 255, 255, 0.9);
+            }
+        }
+    }
+    .logins {
+        margin-top: 20px;
+        height: 38px;
+        .item{
+            padding: 0 20px;
+            a{
+                display: block;
+                line-height: 38px;
+                font-size: 14px;
+                font-weight: bolder;
+                text-align: center;
+                border-radius: 8px;
+                color: #fff;
+                background: @main-color;
+            }
+        }
+        
+    }
+    .nav {
+        overflow: hidden;
+        margin: 20px 0;
+        background: #fff;
+        li {
+            padding: 5px 10px;
+            &+li {
+                border-top: 1px solid #eee;
+            }
+            a {
+                height: 38px;
+                line-height: 38px;
+                font-size: 14px;
+                color: #222;
+                .font {
+                    width: 40px;
+                    .iconfont {
+                        font-size: 24px;
+                    }
+                }
+                .arrow {
+                    color: #ddd;
+                }
+            }
         }
     }
 }

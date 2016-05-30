@@ -1,4 +1,4 @@
-import React,{Component} from 'react';
+import React, {Component} from 'react';
 import {Link} from 'react-router';
 
 /*
@@ -14,19 +14,19 @@ import {Header, Loading} from './common/index';
 class ArticleId extends Component {
     constructor(props) {
         super(props);
-        
-        
+
+
         this.state = {
             loadMsg: '正在加载中...',
             loadState: 0,  //0 正在加载中, 1加载失败，2加载成功
             data: null
         };
 
-        
+
     }
     render() {
         let main = null;
-        let {loadState,loadMsg, title, data} = this.state;
+        let {loadState, loadMsg, title, data} = this.state;
         switch (loadState) {
             case 0:
                 main = (<Loading loadState={loadState} loadMsg={loadMsg} />);
@@ -37,7 +37,7 @@ class ArticleId extends Component {
                 main = (<View {...data} />);
                 break;
         }
-        
+
         return (
             <div>
                 <Header leftTo="/" leftIcon="fanhui" title="详情" />
@@ -64,7 +64,7 @@ class ArticleId extends Component {
         });
     }
     componentWillUnmount() {
-        if(this.ajax) this.ajax.end();
+        if (this.ajax) this.ajax.end();
     }
 };
 
@@ -75,7 +75,7 @@ class View extends Component {
             <div className="article-view">
                 <h2>{book_title}</h2>
                 <div className="yue">阅读：{book_click}</div>
-                <article dangerouslySetInnerHTML={{__html: book_content}}>{}</article>
+                <article dangerouslySetInnerHTML={{ __html: book_content }}>{}</article>
             </div>
         );
     }

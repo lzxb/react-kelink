@@ -1,7 +1,7 @@
 /*
     react 相关
 */
-import React,{Component} from 'react';
+import React, {Component} from 'react';
 import {Link} from 'react-router';
 
 /*
@@ -33,13 +33,13 @@ class Index extends Component {
         */
         this.initApp = (props) => {
             let {DB, location} = props;
-            this.classid = /^\d+$/.test(location.query.classid) ? location.query.classid : config.indexClassId ; //如果没有栏目id传过来，默认为0
+            this.classid = /^\d+$/.test(location.query.classid) ? location.query.classid : config.indexClassId; //如果没有栏目id传过来，默认为0
             location.query.classid = this.classid;
             if (!DB.classid[this.classid]) {
                 DB.classid[this.classid] = Tool.merged(DB.def); //没有指定栏目的数据库，将默认的复制过来给指定栏目id
             }
         }
-        
+
         /*
             DOM更新完成
         */
@@ -54,13 +54,13 @@ class Index extends Component {
                 output: 'json'
             };
             window.scrollTo(classid.scrollX, classid.scrollY); //设置滚动条位置
-            if(!classid.getNextBtn) return false; //已经全部加载完成分页了，无需重新加载
+            if (!classid.getNextBtn) return false; //已经全部加载完成分页了，无需重新加载
             this.newGetNext = new GetNext(this.refs.dataload, {
                 url: '/article/list.aspx',
                 data: data,
                 start: (el) => { //开始加载
                     classid.loadState = 0;
-                    GET_DATA_START(DB); 
+                    GET_DATA_START(DB);
                 },
                 load: (data) => { //加载成功
                     classid.page++;
@@ -69,15 +69,15 @@ class Index extends Component {
                         classid.loadMsg = '没有了';
                         classid.getNextBtn = false;
                         this.newGetNext.end(); //结束分页插件
-                        
-                        if (!data){
+
+                        if (!data) {
                             classid.title = '';
                             classid.loadMsg = '暂无记录';
                         }
-                        
+
                         return GET_DATA_SUCCESS(DB);
 
-                    }else if (Tool.isArray(classid.data)) {
+                    } else if (Tool.isArray(classid.data)) {
                         Array.prototype.push.apply(classid.data, data);
                     } else {
                         classid.data = data;
@@ -89,7 +89,7 @@ class Index extends Component {
                     } else {
                         classid.title = data[0].classname;
                     }
-                    
+
                     GET_DATA_SUCCESS(DB);
                 },
                 error: () => { //加载失败
@@ -109,11 +109,11 @@ class Index extends Component {
             classid.scrollY = window.scrollY;
             SETSCROLL(DB); //记录滚动条位置
 
-            if(this.newGetNext) this.newGetNext.end(); //结束分页插件
+            if (this.newGetNext) this.newGetNext.end(); //结束分页插件
         }
-        
+
         this.initApp(this.props);
-        
+
     }
     render() {
         let {loadState, title, data, loadMsg} = this.props.DB.classid[this.classid];
@@ -129,7 +129,7 @@ class Index extends Component {
             leftTo = '/menu';
             leftIcon = 'fanhui';
         }
-        
+
         return (
             <div>
                 <Header leftTo={leftTo} leftIcon={leftIcon} title={title} />
@@ -139,10 +139,10 @@ class Index extends Component {
             </div>
         );
     }
-    componentDidMount () {
+    componentDidMount() {
         this.DOMLoad(this.props);
     }
-    shouldComponentUpdate (np) {     
+    shouldComponentUpdate(np) {
         if (np.location.query.classid !== this.classid) {
             this.unmount(this.props); //卸载前一个栏目相关信息
             this.initApp(np);
@@ -150,16 +150,16 @@ class Index extends Component {
             this.classidBtn = true;
             return false;
         }
-        
+
         return true;
     }
-    componentDidUpdate () {
+    componentDidUpdate() {
         if (this.classidBtn) {
             this.DOMLoad(this.props);
             this.classidBtn = false;
         }
     }
-    componentWillUnmount () {
+    componentWillUnmount() {
         this.unmount(this.props);
     }
 };
@@ -176,12 +176,12 @@ export class ArticleList extends Component {
                         let {id, book_title, book_content, book_click, classname, book_classid, book_img} = item;
                         book_content = book_content.substring(0, 50) + '...';
                         let images = null;
-                        if(/^http/.test(book_img)) {
+                        if (/^http/.test(book_img)) {
                             images = (
-                                <div className="pictrue" style={{backgroundImage: 'url(' + book_img + ')'}}></div>
+                                <div className="pictrue" style={{ backgroundImage: 'url(' + book_img + ')' }}></div>
                             );
                         }
-                        
+
                         return (
                             <li key={index}>
                                 <Link to={'/article/' + id}>
@@ -204,4 +204,4 @@ export class ArticleList extends Component {
     }
 }
 
-export default connect((state) => { return {DB: state.classNewList}; },action('classNewList'))(Index); //连接redux
+export default connect((state) => { return { DB: state.classNewList }; }, action('classNewList'))(Index); //连接redux

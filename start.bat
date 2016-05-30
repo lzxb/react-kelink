@@ -1,6 +1,6 @@
-echo Æô¶¯·şÎñÆ÷
+echo å¯åŠ¨æœåŠ¡å™¨
 cd E:\react-kelink
 start npm start
-echo ±àÒë
+echo ç¼–è¯‘å‰ç«¯ä»£ç 
 cd E:\react-kelink
-start webpack -p
+start webpack -w

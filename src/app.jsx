@@ -7,11 +7,11 @@ import './less/style.less'; //css文件
 import './iconfont/iconfont.css';
 
 store.subscribe(function () {
-//    console.log(store.getState());
+    //    console.log(store.getState());
 });
 ReactDOM.render(
-	<Provider store={store}>
+    <Provider store={store}>
         {route}
-	</Provider>,
-	document.getElementById('app') 
+    </Provider>,
+    document.getElementById('app')
 );

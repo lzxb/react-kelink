@@ -4,24 +4,30 @@ import {Link} from 'react-router';
 /*
     全局公共头部
 */
-export class Header extends Component{
+export class Header extends Component {
     constructor(props) {
         super(props);
     }
     render() {
         let {title, leftTo, leftIcon, rightTo, rightIcon } = this.props;
         let left = null;
-        
+
         if (leftTo && leftIcon) {
             left = (
                 <Link to={leftTo}>
                     <i className={'iconfont icon-' + leftIcon}></i>
                 </Link>
             );
+        } else if (leftIcon === 'fanhui') { //返回上一页
+            left = (
+                <a onClick={this.context.router.goBack}>
+                    <i className={'iconfont icon-' + leftIcon}></i>
+                </a>
+            );
         }
-        
+
         let right = null;
-        
+
         if (rightTo && rightIcon) {
             right = (
                 <Link to={rightTo}>
@@ -29,7 +35,7 @@ export class Header extends Component{
                 </Link>
             );
         }
-        
+
         return (
             <header className="common-header" data-flex>
                 <div className="icon" data-flex="main:center cross:center" data-flex-box="0">
@@ -43,7 +49,9 @@ export class Header extends Component{
         )
     }
 }
-
+Header.contextTypes = {
+    router: React.PropTypes.object.isRequired
+}
 /*
     loading 加载动画
 */
@@ -76,8 +84,8 @@ export class Footer extends Component {
                         </Link>
                     </li>
                     <li className={arr[2]}>
-                        <Link to="/about">
-                            <i className="iconfont icon-guanyu"></i>关于
+                        <Link to="/user">
+                            <i className="iconfont icon-gerenzhongxin"></i>我的
                         </Link>
                     </li>
                 </ul>
