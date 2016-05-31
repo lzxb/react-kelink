@@ -14,36 +14,29 @@ import {Header, Footer, Loading} from './common/index';
 class Menu extends Component {
     constructor(props) {
         super(props);
-
-        /*
-            程序初始化时执行
-        */
-        this.initApp = (props) => {
-
-        }
+        this.state = this.props.state;
         /*
             DOM 更新完成后执行方法
         */
         this.DOMLoad = (props) => {
-            let {DB, GET_DATA_SUCCESS, GET_DATA_ERROR} = this.props;
-            window.scrollTo(DB.scrollX, DB.scrollY); //设置滚动条位置
-            if (DB.loadState !== 2) {
+            let {state, GET_DATA_SUCCESS, GET_DATA_ERROR} = this.props;
+            window.scrollTo(state.scrollX, state.scrollY); //设置滚动条位置
+            if (state.loadState !== 2) {
                 this.ajax = Tool.get('/wapindex.aspx', { output: 'json', siteid: config.siteid, classid: config.indexClassId }, GET_DATA_SUCCESS, GET_DATA_ERROR);
             }
         }
 
-        this.unmount = (props) => {
+        this.unmount = (props, state) => {
 
             if (this.ajax) this.ajax.end(); //解除ajax相关
             this.props.SETSCROLL();
         }
 
-        this.initApp(this.props);
-
     }
     render() {
         let main = null;
-        let {loadState, loadMsg, data} = this.props.DB;
+        let {loadState, loadMsg, data} = this.props.state;
+        console.log(this.state);
         switch (loadState) {
             case 0:
                 main = (<Loading loadState={loadState} loadMsg={loadMsg} />);
@@ -92,4 +85,4 @@ class MenuList extends Component {
     }
 }
 
-export default connect((state) => { return { DB: state.classMenuList }; }, action('classMenuList'))(Menu); //连接redux
+export default connect((state) => { return { state: state.classMenuList }; }, action('classMenuList'))(Menu); //连接redux

@@ -28972,35 +28972,29 @@
 	    function Menu(props) {
 	        _classCallCheck(this, Menu);
 
-	        /*
-	            程序初始化时执行
-	        */
-
 	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Menu).call(this, props));
 
-	        _this.initApp = function (props) {};
+	        _this.state = _this.props.state;
 	        /*
 	            DOM 更新完成后执行方法
 	        */
 	        _this.DOMLoad = function (props) {
 	            var _this$props = _this.props;
-	            var DB = _this$props.DB;
+	            var state = _this$props.state;
 	            var GET_DATA_SUCCESS = _this$props.GET_DATA_SUCCESS;
 	            var GET_DATA_ERROR = _this$props.GET_DATA_ERROR;
 
-	            window.scrollTo(DB.scrollX, DB.scrollY); //设置滚动条位置
-	            if (DB.loadState !== 2) {
+	            window.scrollTo(state.scrollX, state.scrollY); //设置滚动条位置
+	            if (state.loadState !== 2) {
 	                _this.ajax = _Tool2.default.get('/wapindex.aspx', { output: 'json', siteid: _config2.default.siteid, classid: _config2.default.indexClassId }, GET_DATA_SUCCESS, GET_DATA_ERROR);
 	            }
 	        };
 
-	        _this.unmount = function (props) {
+	        _this.unmount = function (props, state) {
 
 	            if (_this.ajax) _this.ajax.end(); //解除ajax相关
 	            _this.props.SETSCROLL();
 	        };
-
-	        _this.initApp(_this.props);
 
 	        return _this;
 	    }
@@ -29009,11 +29003,12 @@
 	        key: 'render',
 	        value: function render() {
 	            var main = null;
-	            var _props$DB = this.props.DB;
-	            var loadState = _props$DB.loadState;
-	            var loadMsg = _props$DB.loadMsg;
-	            var data = _props$DB.data;
+	            var _props$state = this.props.state;
+	            var loadState = _props$state.loadState;
+	            var loadMsg = _props$state.loadMsg;
+	            var data = _props$state.data;
 
+	            console.log(this.state);
 	            switch (loadState) {
 	                case 0:
 	                    main = _react2.default.createElement(_index3.Loading, { loadState: loadState, loadMsg: loadMsg });
@@ -29096,7 +29091,7 @@
 	}(_react.Component);
 
 	exports.default = (0, _reactRedux.connect)(function (state) {
-	    return { DB: state.classMenuList };
+	    return { state: state.classMenuList };
 	}, (0, _index2.default)('classMenuList'))(Menu); //连接redux
 
 /***/ },
