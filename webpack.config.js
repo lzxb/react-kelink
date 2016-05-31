@@ -37,19 +37,11 @@ module.exports = {
         }]
     },
     plugins: [
-<<<<<<< HEAD
-        //        new webpack.DefinePlugin({ //编译成生产版本
-        //            'process.env': {
-        //                NODE_ENV: JSON.stringify('production')
-        //            }
-        //        })
-=======
-//        new webpack.DefinePlugin({ //编译成生产版本
-//            'process.env': {
-//                NODE_ENV: JSON.stringify('production')
-//            }
-//        })
->>>>>>> 4d1067ce1956f9b98d861e3bcb9198ca8fc326e9
+        // new webpack.DefinePlugin({ //编译成生产版本
+        //     'process.env': {
+        //         NODE_ENV: JSON.stringify('production')
+        //     }
+        // })
     ],
     resolve: {
         extensions: ['', '.js', '.jsx'], //后缀名自动补全
