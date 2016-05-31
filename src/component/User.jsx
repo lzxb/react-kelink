@@ -14,17 +14,10 @@ import erweima from '../erweima.png';
 
 
 class User extends Component {
-<<<<<<< HEAD
-    constructor (props) {
-        super(props);   
-    }
-=======
->>>>>>> 4d1067ce1956f9b98d861e3bcb9198ca8fc326e9
     render() {
         return (
             <div>
                 <Header title="我的" />
-<<<<<<< HEAD
                 <div className="user">
                     <div className="head">
                         <div className="headimg" data-flex="dir:top main:center cross:center">
@@ -32,7 +25,7 @@ class User extends Component {
                             <div className="name">狼族小狈</div>
                         </div>
                     </div>
-                    <div className="logins" data-flex="box:mean"> 
+                    <div className="logins" data-flex="box:mean">
                         <div className="item">
                             <Link to="/login">登录</Link>
                         </div>
@@ -103,38 +96,8 @@ class User extends Component {
                     </ul>
                 </div>
                 <Footer index="2"/>
-=======
-                <div className="login">
-                    <div className="line" data-flex="box:first">
-                        <div className="key" data-flex="box:mean">
-                            <div>用</div>
-                            <div>户</div>
-                            <div>名</div>
-                        </div>
-                        <div className="value">
-                            <input type="text" />
-                        </div>
-                    </div>
-                    <div className="line" data-flex="box:first">
-                        <div className="key" data-flex="box:mean">
-                            <div>密</div>
-                            <div>码</div>
-                        </div>
-                        <div className="value">
-                            <input type="text" />
-                        </div>
-                    </div>
-                    <div className="btn">登录</div>
-                </div>
-                <Footer index="3"/>
->>>>>>> 4d1067ce1956f9b98d861e3bcb9198ca8fc326e9
             </div>
         );
     }
 };
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 4d1067ce1956f9b98d861e3bcb9198ca8fc326e9
 export default User;

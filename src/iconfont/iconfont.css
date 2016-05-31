@@ -1,18 +1,10 @@
 
 @font-face {font-family: "iconfont";
-<<<<<<< HEAD
-  src: url('iconfont.eot?t=1464630909'); /* IE9*/
-  src: url('iconfont.eot?t=1464630909#iefix') format('embedded-opentype'), /* IE6-IE8 */
-  url('iconfont.woff?t=1464630909') format('woff'), /* chrome, firefox */
-  url('iconfont.ttf?t=1464630909') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
-  url('iconfont.svg?t=1464630909#iconfont') format('svg'); /* iOS 4.1- */
-=======
-  src: url('iconfont.eot?t=1464511427'); /* IE9*/
-  src: url('iconfont.eot?t=1464511427#iefix') format('embedded-opentype'), /* IE6-IE8 */
-  url('iconfont.woff?t=1464511427') format('woff'), /* chrome, firefox */
-  url('iconfont.ttf?t=1464511427') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
-  url('iconfont.svg?t=1464511427#iconfont') format('svg'); /* iOS 4.1- */
->>>>>>> 4d1067ce1956f9b98d861e3bcb9198ca8fc326e9
+  src: url('iconfont.eot?t=1464678322'); /* IE9*/
+  src: url('iconfont.eot?t=1464678322#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('iconfont.woff?t=1464678322') format('woff'), /* chrome, firefox */
+  url('iconfont.ttf?t=1464678322') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('iconfont.svg?t=1464678322#iconfont') format('svg'); /* iOS 4.1- */
 }
 
 .iconfont {
