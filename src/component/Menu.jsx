@@ -36,7 +36,6 @@ class Menu extends Component {
     render() {
         let main = null;
         let {loadState, loadMsg, data} = this.props.state;
-        console.log(this.state);
         switch (loadState) {
             case 0:
                 main = (<Loading loadState={loadState} loadMsg={loadMsg} />);

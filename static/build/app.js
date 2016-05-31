@@ -29008,7 +29008,6 @@
 	            var loadMsg = _props$state.loadMsg;
 	            var data = _props$state.data;
 
-	            console.log(this.state);
 	            switch (loadState) {
 	                case 0:
 	                    main = _react2.default.createElement(_index3.Loading, { loadState: loadState, loadMsg: loadMsg });
