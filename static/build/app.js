@@ -28972,12 +28972,12 @@
 	    function Menu(props) {
 	        _classCallCheck(this, Menu);
 
-	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Menu).call(this, props));
-
-	        _this.state = _this.props.state;
 	        /*
 	            DOM 更新完成后执行方法
 	        */
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Menu).call(this, props));
+
 	        _this.DOMLoad = function (props) {
 	            var _this$props = _this.props;
 	            var state = _this$props.state;
@@ -29506,15 +29506,41 @@
 	var User = function (_Component) {
 	    _inherits(User, _Component);
 
-	    function User() {
+	    function User(props) {
 	        _classCallCheck(this, User);
 
-	        return _possibleConstructorReturn(this, Object.getPrototypeOf(User).apply(this, arguments));
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(User).call(this, props));
+
+	        _this.state = {
+	            logname: '', // 用户ID/用户名/手机号码*
+	            logpass: '', // 密码
+	            action: 'login',
+	            classid: _config2.default.indexClassId,
+	            siteid: _config2.default.siteid,
+	            sid: '-2-0-0-0-0',
+	            backurl: '' //来源地址
+	        };
+
+	        _this.submit = function () {
+	            _Tool2.default.post('/waplogin.aspx', _this.state, function (text) {
+	                console.log(text);
+	            }, function () {
+	                console.log('登录失败');
+	            });
+	        };
+
+	        return _this;
 	    }
 
 	    _createClass(User, [{
 	        key: 'render',
 	        value: function render() {
+	            var _this2 = this;
+
+	            var _state = this.state;
+	            var logname = _state.logname;
+	            var logpass = _state.logpass;
+
 	            return _react2.default.createElement(
 	                'div',
 	                null,
@@ -29547,7 +29573,9 @@
 	                        _react2.default.createElement(
 	                            'div',
 	                            { className: 'value' },
-	                            _react2.default.createElement('input', { type: 'text', placeholder: '用户名/手机号码/ID' })
+	                            _react2.default.createElement('input', { type: 'text', defaultValue: logname, placeholder: '用户名/手机号码/ID', onInput: function onInput(e) {
+	                                    _this2.state.logname = e.target.value;
+	                                } })
 	                        )
 	                    ),
 	                    _react2.default.createElement(
@@ -29570,12 +29598,14 @@
 	                        _react2.default.createElement(
 	                            'div',
 	                            { className: 'value' },
-	                            _react2.default.createElement('input', { type: 'text', placeholder: '密码' })
+	                            _react2.default.createElement('input', { type: 'text', defaultValue: logpass, placeholder: '密码', onInput: function onInput(e) {
+	                                    _this2.state.logpass = e.target.value;
+	                                } })
 	                        )
 	                    ),
 	                    _react2.default.createElement(
 	                        'div',
-	                        { className: 'btn' },
+	                        { className: 'btn', onClick: this.submit },
 	                        '登录'
 	                    )
 	                )

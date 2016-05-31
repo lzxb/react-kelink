@@ -14,7 +14,30 @@ import erweima from '../erweima.png';
 
 
 class User extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            logname: '', // 用户ID/用户名/手机号码*
+            logpass: '', // 密码
+            action: 'login',
+            classid: config.indexClassId,
+            siteid: config.siteid,
+            sid: '-2-0-0-0-0',
+            backurl: '' //来源地址
+        };
+
+        this.submit = () => {
+            Tool.post('/waplogin.aspx', this.state, (text) => {
+                console.log(text);
+            }, () => {
+                console.log('登录失败');
+            });
+        }
+
+    }
     render() {
+        let {logname, logpass} = this.state;
         return (
             <div>
                 <Header leftIcon="fanhui" title="登录" />
@@ -26,7 +49,7 @@ class User extends Component {
                             <div>名</div>
                         </div>
                         <div className="value">
-                            <input type="text" placeholder="用户名/手机号码/ID" />
+                            <input type="text" defaultValue={logname} placeholder="用户名/手机号码/ID" onInput={(e) => { this.state.logname = e.target.value; } } />
                         </div>
                     </div>
                     <div className="line" data-flex="box:first">
@@ -35,10 +58,10 @@ class User extends Component {
                             <div>码</div>
                         </div>
                         <div className="value">
-                            <input type="text" placeholder="密码" />
+                            <input type="text" defaultValue={logpass} placeholder="密码"  onInput={(e) => { this.state.logpass = e.target.value; } } />
                         </div>
                     </div>
-                    <div className="btn">登录</div>
+                    <div className="btn" onClick={this.submit}>登录</div>
                 </div>
             </div>
         );

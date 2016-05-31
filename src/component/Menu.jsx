@@ -14,7 +14,6 @@ import {Header, Footer, Loading} from './common/index';
 class Menu extends Component {
     constructor(props) {
         super(props);
-        this.state = this.props.state;
         /*
             DOM 更新完成后执行方法
         */
