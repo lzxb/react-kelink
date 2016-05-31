@@ -27,25 +27,25 @@ import config from '../config/config';
 class Index extends Component {
     constructor(props) {
         super(props);
-
+        this.state = this.props.state;
         /*
             初始化
         */
-        this.initApp = (props) => {
-            let {DB, location} = props;
+        this.initApp = (props, state) => {
+            let {location} = props;
             this.classid = /^\d+$/.test(location.query.classid) ? location.query.classid : config.indexClassId; //如果没有栏目id传过来，默认为0
             location.query.classid = this.classid;
-            if (!DB.classid[this.classid]) {
-                DB.classid[this.classid] = Tool.merged(DB.def); //没有指定栏目的数据库，将默认的复制过来给指定栏目id
+            if (!state.classid[this.classid]) {
+                state.classid[this.classid] = Tool.merged(state.def); //没有指定栏目的数据库，将默认的复制过来给指定栏目id
             }
         }
 
         /*
             DOM更新完成
         */
-        this.DOMLoad = (props) => {
-            let {DB, GET_DATA_START, GET_DATA_SUCCESS, GET_DATA_ERROR} = props;
-            let classid = DB.classid[this.classid];
+        this.DOMLoad = (props, state) => {
+            let {GET_DATA_START, GET_DATA_SUCCESS, GET_DATA_ERROR} = props;
+            let classid = state.classid[this.classid];
             let data = {
                 siteid: config.siteid,
                 classid: this.classid,
@@ -60,7 +60,7 @@ class Index extends Component {
                 data: data,
                 start: (el) => { //开始加载
                     classid.loadState = 0;
-                    GET_DATA_START(DB);
+                    GET_DATA_START(state);
                 },
                 load: (data) => { //加载成功
                     classid.page++;
@@ -75,7 +75,7 @@ class Index extends Component {
                             classid.loadMsg = '暂无记录';
                         }
 
-                        return GET_DATA_SUCCESS(DB);
+                        return GET_DATA_SUCCESS(state);
 
                     } else if (Tool.isArray(classid.data)) {
                         Array.prototype.push.apply(classid.data, data);
@@ -90,33 +90,33 @@ class Index extends Component {
                         classid.title = data[0].classname;
                     }
 
-                    GET_DATA_SUCCESS(DB);
+                    GET_DATA_SUCCESS(state);
                 },
                 error: () => { //加载失败
                     classid.loadState = 1;
                     classid.loadMsg = '加载失败';
-                    GET_DATA_ERROR(DB);
+                    GET_DATA_ERROR(state);
                 }
             });
         }
         /*
             卸载前
         */
-        this.unmount = (props) => {
-            let {DB, SETSCROLL} = props;
-            let classid = DB.classid[this.classid];
+        this.unmount = (props, state) => {
+            let { SETSCROLL} = props;
+            let classid = state.classid[this.classid];
             classid.scrollX = window.scrollX;
             classid.scrollY = window.scrollY;
-            SETSCROLL(DB); //记录滚动条位置
+            SETSCROLL(state); //记录滚动条位置
 
             if (this.newGetNext) this.newGetNext.end(); //结束分页插件
         }
 
-        this.initApp(this.props);
+        this.initApp(this.props, this.state);
 
     }
     render() {
-        let {loadState, title, data, loadMsg} = this.props.DB.classid[this.classid];
+        let {loadState, title, data, loadMsg} = this.state.classid[this.classid];
         let main = null;
         if (Tool.isArray(data)) {
             main = (<ArticleList list={data} />);
@@ -126,7 +126,7 @@ class Index extends Component {
         let leftIcon = null;
         if (this.classid !== config.indexClassId) {
             index = 1;
-            leftTo = '/menu';
+            leftTo = '/Menu';
             leftIcon = 'fanhui';
         }
 
@@ -140,13 +140,14 @@ class Index extends Component {
         );
     }
     componentDidMount() {
-        this.DOMLoad(this.props);
+        this.DOMLoad(this.props, this.state);
     }
-    shouldComponentUpdate(np) {
-        if (np.location.query.classid !== this.classid) {
-            this.unmount(this.props); //卸载前一个栏目相关信息
-            this.initApp(np);
-            this.props.CLASSID_UPDATE(this.props.DB);
+    shouldComponentUpdate(nextProps, nextState) {
+        if (nextProps.location.query.classid !== this.classid) {
+            this.unmount(this.props, this.state); //卸载前一个栏目相关信息
+            
+            this.initApp(nextProps, nextState);
+            this.props.CLASSID_UPDATE(this.state);
             this.classidBtn = true;
             return false;
         }
@@ -160,7 +161,7 @@ class Index extends Component {
         }
     }
     componentWillUnmount() {
-        this.unmount(this.props);
+        this.unmount(this.props, this.state);
     }
 };
 
@@ -204,4 +205,4 @@ export class ArticleList extends Component {
     }
 }
 
-export default connect((state) => { return { DB: state.classNewList }; }, action('classNewList'))(Index); //连接redux
+export default connect((state) => { return { state: state.classNewList }; }, action('classNewList'))(Index); //连接redux

@@ -19,9 +19,9 @@ const route = (
 	<Router history={hashHistory}>
 		<Route path="/" component={Main}>
 			<IndexRoute component={Index} />
-			<Route path="article/:id" component={ArticleId} />
-			<Route path="menu" component={Menu} />
-			<Route path="about" component={About} />
+			<Route path="Article/:id" component={ArticleId} />
+			<Route path="Menu" component={Menu} />
+			<Route path="About" component={About} />
 			<Route path="User" component={User} />
 			<Route path="Login" component={Login} />
 		</Route>

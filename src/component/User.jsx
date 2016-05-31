@@ -83,7 +83,7 @@ class User extends Component {
                             </Link>
                         </li>
                         <li>
-                            <Link to={"/about"}  data-flex="box:justify">
+                            <Link to={"/About"}  data-flex="box:justify">
                                 <div className="font" data-flex="cross:center">
                                     <i className="iconfont icon-guanyu"></i>
                                 </div>

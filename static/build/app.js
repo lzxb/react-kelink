@@ -22072,9 +22072,9 @@
 			_reactRouter.Route,
 			{ path: '/', component: Main },
 			_react2.default.createElement(_reactRouter.IndexRoute, { component: _Index2.default }),
-			_react2.default.createElement(_reactRouter.Route, { path: 'article/:id', component: _ArticleId2.default }),
-			_react2.default.createElement(_reactRouter.Route, { path: 'menu', component: _Menu2.default }),
-			_react2.default.createElement(_reactRouter.Route, { path: 'about', component: _About2.default }),
+			_react2.default.createElement(_reactRouter.Route, { path: 'Article/:id', component: _ArticleId2.default }),
+			_react2.default.createElement(_reactRouter.Route, { path: 'Menu', component: _Menu2.default }),
+			_react2.default.createElement(_reactRouter.Route, { path: 'About', component: _About2.default }),
 			_react2.default.createElement(_reactRouter.Route, { path: 'User', component: _User2.default }),
 			_react2.default.createElement(_reactRouter.Route, { path: 'Login', component: _Login2.default })
 		)
@@ -27844,33 +27844,31 @@
 	    function Index(props) {
 	        _classCallCheck(this, Index);
 
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Index).call(this, props));
+
+	        _this.state = _this.props.state;
 	        /*
 	            初始化
 	        */
-
-	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Index).call(this, props));
-
-	        _this.initApp = function (props) {
-	            var DB = props.DB;
+	        _this.initApp = function (props, state) {
 	            var location = props.location;
 
 	            _this.classid = /^\d+$/.test(location.query.classid) ? location.query.classid : _config2.default.indexClassId; //如果没有栏目id传过来，默认为0
 	            location.query.classid = _this.classid;
-	            if (!DB.classid[_this.classid]) {
-	                DB.classid[_this.classid] = _Tool2.default.merged(DB.def); //没有指定栏目的数据库，将默认的复制过来给指定栏目id
+	            if (!state.classid[_this.classid]) {
+	                state.classid[_this.classid] = _Tool2.default.merged(state.def); //没有指定栏目的数据库，将默认的复制过来给指定栏目id
 	            }
 	        };
 
 	        /*
 	            DOM更新完成
 	        */
-	        _this.DOMLoad = function (props) {
-	            var DB = props.DB;
+	        _this.DOMLoad = function (props, state) {
 	            var GET_DATA_START = props.GET_DATA_START;
 	            var GET_DATA_SUCCESS = props.GET_DATA_SUCCESS;
 	            var GET_DATA_ERROR = props.GET_DATA_ERROR;
 
-	            var classid = DB.classid[_this.classid];
+	            var classid = state.classid[_this.classid];
 	            var data = {
 	                siteid: _config2.default.siteid,
 	                classid: _this.classid,
@@ -27886,7 +27884,7 @@
 	                start: function start(el) {
 	                    //开始加载
 	                    classid.loadState = 0;
-	                    GET_DATA_START(DB);
+	                    GET_DATA_START(state);
 	                },
 	                load: function load(data) {
 	                    //加载成功
@@ -27902,7 +27900,7 @@
 	                            classid.loadMsg = '暂无记录';
 	                        }
 
-	                        return GET_DATA_SUCCESS(DB);
+	                        return GET_DATA_SUCCESS(state);
 	                    } else if (_Tool2.default.isArray(classid.data)) {
 	                        Array.prototype.push.apply(classid.data, data);
 	                    } else {
@@ -27916,32 +27914,31 @@
 	                        classid.title = data[0].classname;
 	                    }
 
-	                    GET_DATA_SUCCESS(DB);
+	                    GET_DATA_SUCCESS(state);
 	                },
 	                error: function error() {
 	                    //加载失败
 	                    classid.loadState = 1;
 	                    classid.loadMsg = '加载失败';
-	                    GET_DATA_ERROR(DB);
+	                    GET_DATA_ERROR(state);
 	                }
 	            });
 	        };
 	        /*
 	            卸载前
 	        */
-	        _this.unmount = function (props) {
-	            var DB = props.DB;
+	        _this.unmount = function (props, state) {
 	            var SETSCROLL = props.SETSCROLL;
 
-	            var classid = DB.classid[_this.classid];
+	            var classid = state.classid[_this.classid];
 	            classid.scrollX = window.scrollX;
 	            classid.scrollY = window.scrollY;
-	            SETSCROLL(DB); //记录滚动条位置
+	            SETSCROLL(state); //记录滚动条位置
 
 	            if (_this.newGetNext) _this.newGetNext.end(); //结束分页插件
 	        };
 
-	        _this.initApp(_this.props);
+	        _this.initApp(_this.props, _this.state);
 
 	        return _this;
 	    }
@@ -27949,11 +27946,11 @@
 	    _createClass(Index, [{
 	        key: 'render',
 	        value: function render() {
-	            var _props$DB$classid$cla = this.props.DB.classid[this.classid];
-	            var loadState = _props$DB$classid$cla.loadState;
-	            var title = _props$DB$classid$cla.title;
-	            var data = _props$DB$classid$cla.data;
-	            var loadMsg = _props$DB$classid$cla.loadMsg;
+	            var _state$classid$classi = this.state.classid[this.classid];
+	            var loadState = _state$classid$classi.loadState;
+	            var title = _state$classid$classi.title;
+	            var data = _state$classid$classi.data;
+	            var loadMsg = _state$classid$classi.loadMsg;
 
 	            var main = null;
 	            if (_Tool2.default.isArray(data)) {
@@ -27964,7 +27961,7 @@
 	            var leftIcon = null;
 	            if (this.classid !== _config2.default.indexClassId) {
 	                index = 1;
-	                leftTo = '/menu';
+	                leftTo = '/Menu';
 	                leftIcon = 'fanhui';
 	            }
 
@@ -27984,15 +27981,16 @@
 	    }, {
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
-	            this.DOMLoad(this.props);
+	            this.DOMLoad(this.props, this.state);
 	        }
 	    }, {
 	        key: 'shouldComponentUpdate',
-	        value: function shouldComponentUpdate(np) {
-	            if (np.location.query.classid !== this.classid) {
-	                this.unmount(this.props); //卸载前一个栏目相关信息
-	                this.initApp(np);
-	                this.props.CLASSID_UPDATE(this.props.DB);
+	        value: function shouldComponentUpdate(nextProps, nextState) {
+	            if (nextProps.location.query.classid !== this.classid) {
+	                this.unmount(this.props, this.state); //卸载前一个栏目相关信息
+
+	                this.initApp(nextProps, nextState);
+	                this.props.CLASSID_UPDATE(this.state);
 	                this.classidBtn = true;
 	                return false;
 	            }
@@ -28010,7 +28008,7 @@
 	    }, {
 	        key: 'componentWillUnmount',
 	        value: function componentWillUnmount() {
-	            this.unmount(this.props);
+	            this.unmount(this.props, this.state);
 	        }
 	    }]);
 
@@ -28100,7 +28098,7 @@
 	}(_react.Component);
 
 	exports.default = (0, _reactRedux.connect)(function (state) {
-	    return { DB: state.classNewList };
+	    return { state: state.classNewList };
 	}, (0, _index2.default)('classNewList'))(Index); //连接redux
 
 /***/ },
@@ -28325,7 +28323,7 @@
 	                        { className: arr[1] },
 	                        _react2.default.createElement(
 	                            _reactRouter.Link,
-	                            { to: '/menu' },
+	                            { to: '/Menu' },
 	                            _react2.default.createElement('i', { className: 'iconfont icon-caidan' }),
 	                            '分类'
 	                        )
@@ -28335,7 +28333,7 @@
 	                        { className: arr[2] },
 	                        _react2.default.createElement(
 	                            _reactRouter.Link,
-	                            { to: '/user' },
+	                            { to: '/User' },
 	                            _react2.default.createElement('i', { className: 'iconfont icon-gerenzhongxin' }),
 	                            '我的'
 	                        )
@@ -29429,7 +29427,7 @@
 	                            null,
 	                            _react2.default.createElement(
 	                                _reactRouter.Link,
-	                                { to: "/about", 'data-flex': 'box:justify' },
+	                                { to: "/About", 'data-flex': 'box:justify' },
 	                                _react2.default.createElement(
 	                                    'div',
 	                                    { className: 'font', 'data-flex': 'cross:center' },

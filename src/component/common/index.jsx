@@ -79,12 +79,12 @@ export class Footer extends Component {
                         </Link>
                     </li>
                     <li className={arr[1]}>
-                        <Link to="/menu">
+                        <Link to="/Menu">
                             <i className="iconfont icon-caidan"></i>分类
                         </Link>
                     </li>
                     <li className={arr[2]}>
-                        <Link to="/user">
+                        <Link to="/User">
                             <i className="iconfont icon-gerenzhongxin"></i>我的
                         </Link>
                     </li>
