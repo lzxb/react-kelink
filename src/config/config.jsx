@@ -1,6 +1,6 @@
 const config = {};
 
-config.version = '1.0.3'
+config.version = '1.0.4'
 
 config.indexTitle = '柯林文章客户端'; //首页标题
 
