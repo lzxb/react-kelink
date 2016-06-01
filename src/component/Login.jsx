@@ -10,10 +10,9 @@ import action from '../action/index';
 import Tool from '../lib/Tool/Tool';
 import config from '../config/config';
 import {Header, Footer, Loading} from './common/index';
-import erweima from '../erweima.png';
 
 
-class User extends Component {
+export default class Login extends Component {
     constructor(props) {
         super(props);
 
@@ -58,7 +57,7 @@ class User extends Component {
                             <div>码</div>
                         </div>
                         <div className="value">
-                            <input type="text" defaultValue={logpass} placeholder="密码"  onInput={(e) => { this.state.logpass = e.target.value; } } />
+                            <input type="password" defaultValue={logpass} placeholder="密码"  onInput={(e) => { this.state.logpass = e.target.value; } } />
                         </div>
                     </div>
                     <div className="btn" onClick={this.submit}>登录</div>
@@ -67,6 +66,3 @@ class User extends Component {
         );
     }
 };
-
-
-export default User;

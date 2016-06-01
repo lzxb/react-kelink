@@ -6,6 +6,7 @@ import Menu from '../component/Menu';
 import About from '../component/About';
 import User from '../component/User';
 import Login from '../component/Login';
+import Register from '../component/Register';
 
 
 class Main extends Component {
@@ -24,6 +25,7 @@ const route = (
 			<Route path="About" component={About} />
 			<Route path="User" component={User} />
 			<Route path="Login" component={Login} />
+			<Route path="Register" component={Register} />
 		</Route>
 	</Router>
 );
