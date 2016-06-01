@@ -28740,7 +28740,7 @@
 
 	config.version = '1.0.4';
 
-	config.indexTitle = '柯林文章客户端'; //首页标题
+	config.indexTitle = '柯林 Article APP'; //首页标题
 
 	config.siteid = '1000'; //默认网站id
 
