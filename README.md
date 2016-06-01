@@ -15,7 +15,7 @@ NodeJS前端分享群 133240225
 3.react-router
 4.ES6
 5.less
-7.Application Cache
+7.data-flex.css
 8.redux
 ```
 ### 编译流程
