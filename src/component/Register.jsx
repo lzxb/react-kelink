@@ -108,4 +108,7 @@ export default class Register extends Component {
             </div>
         );
     }
+    componentDidMount () {
+        window.scrollTo(0, 0);
+    }
 };

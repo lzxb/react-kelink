@@ -65,4 +65,7 @@ export default class Login extends Component {
             </div>
         );
     }
+    componentDidMount () {
+        window.scrollTo(0, 0);
+    }
 };
