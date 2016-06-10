@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/1340641314/react-kelink#readme",
   "dependencies": {
+    "extract-text-webpack-plugin": "^1.0.1",
     "react": "^15.0.1",
     "react-dom": "^15.0.1",
     "react-redux": "^4.4.5",

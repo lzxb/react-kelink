@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import route from './config/route';
-import store from './config/store'
+import store from './config/store';
 import './less/style.less'; //css文件
 import './iconfont/iconfont.css';
 
@@ -13,5 +13,5 @@ ReactDOM.render(
     <Provider store={store}>
         {route}
     </Provider>,
-    document.getElementById('app')
+    document.body.appendChild(document.createElement('div'))
 );

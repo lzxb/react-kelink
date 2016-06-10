@@ -1,4 +1,5 @@
 var webpack = require('webpack');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
     entry: {
@@ -17,11 +18,11 @@ module.exports = {
         }, {
             test: /\.css$/,
             exclude: /^node_modules$/,
-            loaders: ['style', 'css', 'autoprefixer']
+            loader: ExtractTextPlugin.extract('style-loader', 'css-loader!autoprefixer-loader')
         }, {
             test: /\.less/,
             exclude: /^node_modules$/,
-            loaders: ['style', 'css', 'autoprefixer', 'less'],
+            loader: ExtractTextPlugin.extract('style-loader', 'css-loader!autoprefixer-loader!less-loader')
         }, {
             test: /\.(eot|woff|svg|ttf|woff2|gif|appcache)(\?|$)/,
             exclude: /^node_modules$/,
@@ -37,11 +38,12 @@ module.exports = {
         }]
     },
     plugins: [
-        // new webpack.DefinePlugin({ //编译成生产版本
-        //     'process.env': {
-        //         NODE_ENV: JSON.stringify('production')
-        //     }
-        // })
+        new webpack.DefinePlugin({ //编译成生产版本
+            'process.env': {
+                NODE_ENV: JSON.stringify('production')
+            }
+        }),
+        new ExtractTextPlugin('[name].css')
     ],
     resolve: {
         extensions: ['', '.js', '.jsx'], //后缀名自动补全
