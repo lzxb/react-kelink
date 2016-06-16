@@ -17,9 +17,13 @@ export default class Register extends Component {
         super(props);
 
         this.state = {
-            logname: '', // 用户ID/用户名/手机号码*
-            logpass: '', // 密码
-            action: 'login',
+            output: 'json',
+            tousername: '', //手机号码
+            tonickname: '', // 昵称
+            topassword: '', //密码
+            toemail: '', //邮箱
+            tosex: '0', //性别，0女，1男
+            codecheck: '4000', //验证码
             classid: config.indexClassId,
             siteid: config.siteid,
             sid: '-2-0-0-0-0',
@@ -28,6 +32,7 @@ export default class Register extends Component {
 
         this.submit = () => {
             Tool.post('/waplogin.aspx', this.state, (text) => {
+                alert(text);
                 console.log(text);
             }, () => {
                 console.log('登录失败');
@@ -108,7 +113,7 @@ export default class Register extends Component {
             </div>
         );
     }
-    componentDidMount () {
+    componentDidMount() {
         window.scrollTo(0, 0);
     }
 };

@@ -7,6 +7,7 @@ import About from '../component/About';
 import User from '../component/User';
 import Login from '../component/Login';
 import Register from '../component/Register';
+import MsgList from '../component/MsgList';
 
 
 class Main extends Component {
@@ -26,6 +27,7 @@ const route = (
 			<Route path="User" component={User} />
 			<Route path="Login" component={Login} />
 			<Route path="Register" component={Register} />
+			<Route path="MsgList" component={MsgList} />
 		</Route>
 	</Router>
 );

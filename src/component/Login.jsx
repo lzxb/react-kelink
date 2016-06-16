@@ -17,17 +17,16 @@ export default class Login extends Component {
         super(props);
 
         this.state = {
-            logname: '', // 用户ID/用户名/手机号码*
-            logpass: '', // 密码
+            logname: '',
+            logpass: '',
             action: 'login',
             classid: config.indexClassId,
-            siteid: config.siteid,
-            sid: '-2-0-0-0-0',
-            backurl: '' //来源地址
+            siteid: config.siteid
         };
 
         this.submit = () => {
-            Tool.post('/waplogin.aspx', this.state, (text) => {
+            Tool.post('/JsonAPI/waplogin.aspx', this.state, (text) => {
+                alert(text);
                 console.log(text);
             }, () => {
                 console.log('登录失败');
@@ -65,7 +64,7 @@ export default class Login extends Component {
             </div>
         );
     }
-    componentDidMount () {
+    componentDidMount() {
         window.scrollTo(0, 0);
     }
 };

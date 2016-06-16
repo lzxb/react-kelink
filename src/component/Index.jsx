@@ -145,7 +145,7 @@ class Index extends Component {
     shouldComponentUpdate(nextProps, nextState) {
         if (nextProps.location.query.classid !== this.classid) {
             this.unmount(this.props, this.state); //卸载前一个栏目相关信息
-            
+
             this.initApp(nextProps, nextState);
             this.props.CLASSID_UPDATE(this.state);
             this.classidBtn = true;
@@ -179,7 +179,7 @@ export class ArticleList extends Component {
                         let images = null;
                         if (/^http/.test(book_img)) {
                             images = (
-                                <div className="pictrue" style={{ backgroundImage: 'url(' + book_img + ')' }}></div>
+                                <div className="pictrue"><img src={book_img} /></div>
                             );
                         }
 

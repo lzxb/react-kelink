@@ -42,7 +42,7 @@ app.get('/article/view.aspx', function (req, res) {
 //登录
 
 app.post('/waplogin.aspx', function (req, res) {
-    request.post({ url: 'http://kelink.com/waplogin.aspx', form: req.body }, function (err, httpResponse, body) {
+    request.post({ url: 'http://xk-web.kelink.com/JsonAPI/waplogin.aspx', form: req.body }, function (err, httpResponse, body) {
         res.send(body);
     });
 

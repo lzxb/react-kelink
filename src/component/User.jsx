@@ -46,7 +46,7 @@ class User extends Component {
                             </Link>
                         </li>
                         <li>
-                            <Link to="#"  data-flex="box:justify">
+                            <Link to="/MsgList"  data-flex="box:justify">
                                 <div className="font" data-flex="cross:center">
                                     <i className="iconfont icon-xiaoxi"></i>
                                 </div>
